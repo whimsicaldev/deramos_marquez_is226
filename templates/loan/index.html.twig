@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Loan index{% endblock %}
+
+{% block body %}
+    <h1>Loan index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for loan in loans %}
+            <tr>
+                <td>{{ loan.id }}</td>
+                <td>{{ loan.amount }}</td>
+                <td>{{ loan.date ? loan.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_loan_show', {'id': loan.id}) }}">show</a>
+                    <a href="{{ path('app_loan_edit', {'id': loan.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_loan_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New UserGroup{% endblock %}
+
+{% block body %}
+    <h1>Create new UserGroup</h1>
+
+    {{ include('user_group/_form.html.twig') }}
+
+    <a href="{{ path('app_user_group_index') }}">back to list</a>
+{% endblock %}

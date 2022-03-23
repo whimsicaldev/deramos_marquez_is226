@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Connection{% endblock %}
+
+{% block body %}
+    <h1>Create new Connection</h1>
+
+    {{ include('connection/_form.html.twig') }}
+
+    <a href="{{ path('app_connection_index') }}">back to list</a>
+{% endblock %}

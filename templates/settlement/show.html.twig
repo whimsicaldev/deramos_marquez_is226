@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Settlement{% endblock %}
+
+{% block body %}
+    <h1>Settlement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ settlement.id }}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{{ settlement.amount }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ settlement.date ? settlement.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_settlement_index') }}">back to list</a>
+
+    <a href="{{ path('app_settlement_edit', {'id': settlement.id}) }}">edit</a>
+
+    {{ include('settlement/_delete_form.html.twig') }}
+{% endblock %}
