@@ -13,5 +13,5 @@ export default {
 </template>
 
 <style lang="css">
-@import "../styles/app.css";
+  @import "../styles/app.css";
 </style>
