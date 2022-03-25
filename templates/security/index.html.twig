@@ -1,0 +1,27 @@
+{# templates/login/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{# ... #}
+
+{% block body %}
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+      <form action="{{ path('login') }}" method="post">
+        <input type="text" id="username" name="_username" value="{{ last_username }}"  class="fadeIn second" placeholder="username"/>
+        <input type="password" id="password" name="_password" class="fadeIn third" placeholder="password"/>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <input type="submit" class="fadeIn fourth" value="Log In">
+      </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
