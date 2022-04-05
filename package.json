@@ -1,8 +1,4 @@
 {
-    "engines": {
-        "node": "15.11.0",
-        "npm": "7.10.0"
-    },
     "devDependencies": {
         "@hotwired/stimulus": "^3.0.0",
         "@popperjs/core": "^2.11.4",
@@ -21,8 +17,7 @@
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "build": "encore production",
-        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
+        "build": "encore production"
     },
     "dependencies": {
         "bootstrap": "^5.1.3"
