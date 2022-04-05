@@ -1,10 +1,12 @@
 <?php
+
 namespace App\DBAL;
 
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
-class EnumConnectionType extends Type {
+class EnumConnectionType extends Type 
+{
     const ENUM_CONNECTION = 'enumconnection';
     const STATUS_REQUESTED = 'requested';
     const STATUS_APPROVED = 'approved';
