@@ -23,6 +23,6 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress",
-        "heroku-postbuild": "npm install && npm run build"
+        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
     }
 }
