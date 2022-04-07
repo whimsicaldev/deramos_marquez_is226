@@ -1,0 +1,36 @@
+.logo-container, .signin-container {
+    height: 100%;
+    float: left;
+}
+
+#logo {
+    background-image: url("../images/logo.png");
+    width: 526px;
+    height: 165px;
+    position: relative;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%)
+}
+
+.signin-container {
+    background-color: #CCF3CF75;
+}
+
+.signin-control {
+    width: 50%;
+    margin: auto;
+    position: relative;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%)
+}
+
+.welcome-message {
+    font-weight: lighter;
+}
+
+.welcome-message h1 {
+    font-size: 5rem;
+    font-weight: bolder;
+}
