@@ -13,6 +13,14 @@
                 <h1>Welcome</h1>
                 <p>Keeping track of our expenses in relation with our friends and families has been a constant challenge for every Filipinos nowadays. More than anything, we would want to ensure that we get the best out of our spending. We are here to help you treasure what you value most.</p>
             </div>
+            <div class="signin-form">
+                <form action="{{ path('login') }}" method="post" id="signin">
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username"/>
+                    <input type="password" id="password" name="_password" placeholder="Password"/>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <input type="submit" class="btn btn-dark" value="Log In">
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}
