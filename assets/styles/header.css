@@ -1,0 +1,12 @@
+.navbar {
+    background-color: white;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
+}
+
+.navbar-brand {
+    background-image: url("../images/logo.png");
+    background-size: cover;
+    width: 204px;
+    height: 64px;
+    margin-left: 10px;
+}
