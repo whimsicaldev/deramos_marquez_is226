@@ -56,7 +56,7 @@ class SecurityController extends AbstractController
         
         $email = (new Email())
             ->from('no-reply@mayutangba.me')
-            ->to('jesusgerardderamos@gmail.com')
+            ->to($user->getEmail())
             ->subject('Time for Symfony Mailer!')
             ->text('Sending emails is fun again!');
 
