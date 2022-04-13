@@ -12,7 +12,6 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -38,6 +37,7 @@ security:
     access_control:
         - { path: ^/user/new, role: PUBLIC_ACCESS }
         - { path: ^/login, role: PUBLIC_ACCESS }
+        - { path: ^/verify, role: PUBLIC_ACCESS }
         - { path: ^/register, role: PUBLIC_ACCESS }
         - { path: ^/, role: ROLE_USER }
         # - { path: ^/admin, roles: ROLE_ADMIN }
