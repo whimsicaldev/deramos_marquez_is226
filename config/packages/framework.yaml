@@ -3,7 +3,7 @@ framework:
     secret: '%env(APP_SECRET)%'
     #csrf_protection: true
     http_method_override: false
-    trusted_hosts:  ['mayutangba.me', 'may-utang-ba-me.herokuapp.com']
+    trusted_hosts:  ['mayutangba.me', 'may-utang-ba-me.herokuapp.com', 'localhost']
     # Enables session support. Note that the session will ONLY be started if you read or write from it.
     # Remove or comment this section to explicitly disable session support.
     session:
@@ -11,7 +11,6 @@ framework:
         cookie_secure: auto
         cookie_samesite: lax
         storage_factory_id: session.storage.factory.native
-        cookie_domain: .mayutangba.me
 
     #esi: true
     #fragments: true
