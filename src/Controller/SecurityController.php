@@ -14,7 +14,7 @@ use Symfony\Component\Mime\Email;
 
 class SecurityController extends AbstractController
 {
-    #[Route('/login', name: 'app_login')]
+    #[Route('/login', name: 'login')]
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
          // get the login error if there is one
@@ -29,7 +29,7 @@ class SecurityController extends AbstractController
          ]);
     }
 
-    #[Route('/logout', name: 'app_logout')]
+    #[Route('/logout', name: 'logout')]
     public function logout(): void
     {
         // controller can be blank: it will never be called!
