@@ -1,0 +1,16 @@
+{% apply inky_to_html|inline_css(source('@styles/email-template-verify-email.css')) %}
+<container>
+    <img src="{{ email.image('@images/logo.png') }}" class="logo" />
+    <div class="d-flex justify-content-center p-2">
+        <div class="jumbotron verify-email-container">
+            <h1 class="display-4">Welcome!</h1>
+            <p class="lead">Let us know if this is really your email address, to help us keep your account and website secure.</p>
+            <hr class="my-4">
+            <p>Confirm your email and let’s get started! </p>
+            <p class="lead">
+                <a class="btn btn-dark btn-lg" href="{{ verification_url }}">Confirm Email Now When?</a>
+            </p>
+        </div>
+    </div>
+</container>
+{% endapply %}

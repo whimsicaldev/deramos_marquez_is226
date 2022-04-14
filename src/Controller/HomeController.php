@@ -12,9 +12,13 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(UserInterface $user = null): Response
     {
-        $twigTemplate = $user->isVerified()? 'home/index.html.twig': 'security/verify.html.twig';
-        return $this->render($twigTemplate, [
-            'controller_name' => 'HomeController',
-        ]);
+
+        if($user->isVerified()) {
+            return $this->render('home/index.html.twig', [
+                'controller_name' => 'HomeController',
+            ]);
+        } else {
+            return $this->redirectToRoute('app_verify', [], Response::HTTP_SEE_OTHER);
+        }
     }
 }

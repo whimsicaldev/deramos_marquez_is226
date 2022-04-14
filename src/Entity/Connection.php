@@ -24,7 +24,7 @@ class Connection
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private $amount;
 
-    #[ORM\Column(type: 'enum_connection')]
+    #[ORM\Column(type: 'enumconnection')]
     private $status;
 
     public function getId(): ?int

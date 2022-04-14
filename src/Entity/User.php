@@ -41,6 +41,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\Column(type: 'boolean')]
+    private $isEmailVerificationSent;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -164,6 +167,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function isEmailVerificationSent(): ?bool
+    {
+        return $this->isEmailVerificationSent;
+    }
+
+    public function setIsEmailVerificationSent(bool $isEmailVerificationSent): self
+    {
+        $this->isEmailVerificationSent = $isEmailVerificationSent;
 
         return $this;
     }
