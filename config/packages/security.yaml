@@ -12,6 +12,8 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
+        oauth_user_provider:
+            id: App\Security\OAuthUserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -26,6 +28,17 @@ security:
             logout:
                 path: /logout
                 target: /
+            oauth:
+                resource_owners:
+                    google:             "/login/check-google"
+                login_path:   /oauth/login
+                use_forward:  false
+                failure_path: /login
+
+                oauth_user_provider:
+                    service: security.user.provider.concrete.oauth_user_provider
+                provider: oauth_user_provider
+            entry_point: form_login
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -35,9 +48,10 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/user/new, role: PUBLIC_ACCESS }
         - { path: ^/login, role: PUBLIC_ACCESS }
+        - { path: ^/oauth/login, role: PUBLIC_ACCESS }
         - { path: ^/verify, role: PUBLIC_ACCESS }
+        - { path: ^/connect/google, role: PUBLIC_ACCESS }
         - { path: ^/register, role: PUBLIC_ACCESS }
         - { path: ^/, role: ROLE_USER }
         # - { path: ^/admin, roles: ROLE_ADMIN }

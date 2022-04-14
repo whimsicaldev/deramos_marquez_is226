@@ -46,6 +46,10 @@ class SecurityController extends AbstractController
     #[Route('/verify', name: 'app_verify')]
     public function verify(UserInterface $user = null, Request $request, VerifyEmailHelperInterface $verifyEmailHelper, UserRepository $userRepository, LoggerInterface $logger, ): Response 
     {
+        if($user && $user->isVerified()) {
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+        }
+
         $userId = $request->query->get('id');
         if($userId) {
             $user = $userRepository->find($userId);
@@ -110,6 +114,7 @@ class SecurityController extends AbstractController
             $user->setIsEmailVerificationSent(true);
             $userRepository->add($user);
         }
+
         return $this->redirectToRoute('app_verify', ['verification_sent' => true], Response::HTTP_SEE_OTHER);
     }
 }

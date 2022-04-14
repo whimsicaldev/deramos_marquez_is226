@@ -14,4 +14,5 @@ import './styles/security-verify.css';
 // start the Stimulus application
 import './bootstrap';
 import 'bootstrap/scss/bootstrap.scss';
+import 'bootstrap-icons/font/bootstrap-icons.scss';
 import 'jquery';

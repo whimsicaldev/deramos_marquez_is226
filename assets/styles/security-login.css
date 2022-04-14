@@ -35,9 +35,12 @@
     font-weight: bolder;
 }
 
+.signin-form, .signin-auth {
+    margin-top: 20px;
+}
+
 #signin {
     display: inline-flex;
-    margin-top: 20px;
     width: 100%;
 }
 
