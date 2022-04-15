@@ -44,6 +44,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isEmailVerificationSent;
 
+    private $password1;
+
+    private $password2;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +109,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getPassword1(): ?string
+    {
+        return $this->password1;
+    }
+
+    public function setPassword1(string $password1): self
+    {
+        $this->password1 = $password1;
+
+        return $this;
+    }
+
+    public function getPassword2(): ?string
+    {
+        return $this->password2;
+    }
+
+    public function setPassword2(string $password2): self
+    {
+        $this->password2 = $password2;
 
         return $this;
     }

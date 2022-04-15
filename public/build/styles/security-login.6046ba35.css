@@ -92,8 +92,8 @@
     margin-bottom: 40px;
 }
 
-.last-input > input {
-    margin-bottom: 0px !important;
+.last-input input {
+    margin-bottom: 0px;
 }
 
 #form-help {

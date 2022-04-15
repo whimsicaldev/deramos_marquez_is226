@@ -4,3 +4,7 @@ $('#submit-signin').on('click', () => {
         $(elem).addClass('submitted');
     });
 });
+
+$(window).on('load', function() {
+    $('#exampleModal').modal('show');
+});

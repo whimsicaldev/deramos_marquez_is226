@@ -1,1 +1,8 @@
-.bg,body,html{height:100%}.bg{background-image:url(../images/background.png)}
+body, html {
+  height: 100%;
+}
+
+.bg {
+  background-image: url("../images/background.png");
+  height: 100%; 
+}

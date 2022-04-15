@@ -88,14 +88,6 @@
     margin-bottom: 20px;
 }
 
-.last-input {
-    margin-bottom: 40px;
-}
-
-.last-input > input {
-    margin-bottom: 0px !important;
-}
-
-#form-help {
-    position: absolute;
+#signup-modal-body input[type=password]:last-child {
+    margin-bottom: 50px;
 }

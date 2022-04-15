@@ -89,11 +89,7 @@
 }
 
 .last-input {
-    margin-bottom: 40px;
-}
-
-.last-input > input {
-    margin-bottom: 0px !important;
+    margin-bottom: 50px;
 }
 
 #form-help {

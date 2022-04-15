@@ -14,13 +14,7 @@ $('#signup-modal-body').on('submit', e => {
     if($('#password1').val() !== $('#password2').val()) {
         e.preventDefault();
         e.stopPropagation();
-        $('#password1')[0].setCustomValidity("Invalid field.");
-        $('#password2')[0].setCustomValidity("Invalid field.");
-        $('#form-help').text('Passwords did not match.');
-    } else {
-        $('#password1')[0].setCustomValidity();
-        $('#password2')[0].setCustomValidity();
-        $('#form-help').text('');
+        alert('mismatching passwords');
     }
 });
 
