@@ -75,6 +75,16 @@ Encore
         to: 'images/[path][name].[hash:8].[ext]',
         pattern: /\.(png|jpg|jpeg)$/
     })
+    .copyFiles({
+        from: './assets/styles',
+        to: 'styles/[path][name].[hash:8].[ext]',
+        pattern: /\.(css)$/
+    })
+    .copyFiles({
+        from: './assets/scripts',
+        to: 'scripts/[path][name].[hash:8].[ext]',
+        pattern: /\.(js)$/
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();

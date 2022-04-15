@@ -22,7 +22,7 @@ class SecurityController extends AbstractController
     const VERIFICATION_EMAIL_FAILED = 'VERIFICATION_EMAIL_FAILED';
 
     #[Route('/login', name: 'login')]
-    public function index(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
          // get the login error if there is one
          $error = $authenticationUtils->getLastAuthenticationError();
@@ -30,7 +30,7 @@ class SecurityController extends AbstractController
          // last username entered by the user
          $lastUsername = $authenticationUtils->getLastUsername();
          
-         return $this->render('security/index.html.twig', [
+         return $this->render('security/login.html.twig', [
              'last_username' => $lastUsername,
              'error'         => $error,
          ]);

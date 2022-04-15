@@ -4,7 +4,6 @@
 }
 
 #logo {
-    background-image: url("../images/logo.png");
     width: 526px;
     height: 165px;
     position: relative;
@@ -44,7 +43,7 @@
 }
 
 .signin-auth {
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 #signin {

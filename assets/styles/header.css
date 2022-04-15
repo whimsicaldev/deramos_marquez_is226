@@ -6,7 +6,6 @@
 }
 
 .navbar-brand {
-    background-image: url("../images/logo.png");
     background-size: cover;
     width: 204px;
     height: 64px;

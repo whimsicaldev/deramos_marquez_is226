@@ -1,6 +1,9 @@
-{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('build/styles/security-verify.css') }}" rel="stylesheet"/>
+{% endblock %}
 
-{% block title %}May Utang Ba Me?{% endblock %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
 {% include "header.html.twig" %}

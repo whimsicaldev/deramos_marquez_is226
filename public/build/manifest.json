@@ -1,19 +1,12 @@
 {
-  "build/app.css": "/build/app.css",
-  "build/app.js": "/build/app.js",
-  "build/runtime.js": "/build/runtime.js",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_jquery_dist_jquery_js-884a4e.css": "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_jquery_dist_jquery_js-884a4e.css",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_jquery_dist_jquery_js-884a4e.js": "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_jquery_dist_jquery_js-884a4e.js",
-  "build/fonts/bootstrap-icons.woff": "/build/fonts/bootstrap-icons.c1d7432e.woff",
-  "build/fonts/bootstrap-icons.woff2": "/build/fonts/bootstrap-icons.a13b8155.woff2",
+  "build/app.js": "/build/app.4fe7be59.js",
+  "build/runtime.js": "/build/runtime.ad8a04c6.js",
   "build/images/logo.png": "/build/images/logo.7d2e9fff.png",
+  "build/styles/security-login.css": "/build/styles/security-login.3a0ac9a3.css",
   "build/images/background.png": "/build/images/background.90fda63a.png",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-e6dd89.css": "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-e6dd89.css",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-e6dd89.js": "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-e6dd89.js",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-3d1fc4.css": "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-3d1fc4.css",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-3d1fc4.js": "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-3d1fc4.js",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-9e34d5.css": "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-9e34d5.css",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-9e34d5.js": "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-9e34d5.js",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-0bc7e2.css": "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-0bc7e2.css",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-0bc7e2.js": "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-0bc7e2.js"
+  "build/styles/email-template-verify-email.css": "/build/styles/email-template-verify-email.b004be2f.css",
+  "build/styles/header.css": "/build/styles/header.3df9c34b.css",
+  "build/scripts/security-login.js": "/build/scripts/security-login.9a8b7504.js",
+  "build/styles/security-verify.css": "/build/styles/security-verify.e11f12d9.css",
+  "build/styles/base.css": "/build/styles/base.81846791.css"
 }
