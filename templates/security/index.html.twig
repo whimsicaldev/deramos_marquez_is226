@@ -15,11 +15,14 @@
             </div>
             <div class="signin-form">
                 <form action="{{ path('login') }}" method="post" id="signin">
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username"/>
-                    <input type="password" id="password" name="_password" placeholder="Password"/>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username" required/>
+                    <input type="password" id="password" name="_password" placeholder="Password"  required/>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                    <input type="submit" class="btn btn-dark" value="Log In">
+                    <input type="submit" class="btn btn-dark" value="Log In" id="submit-signin">
                 </form>
+                {% if error %}
+                    <div class="text-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
             </div>
             <div class="signin-auth">
                 <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}" class="btn btn-lg btn-danger">

@@ -1,3 +1,4 @@
+'use strict';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -16,3 +17,11 @@ import './bootstrap';
 import 'bootstrap/scss/bootstrap.scss';
 import 'bootstrap-icons/font/bootstrap-icons.scss';
 import 'jquery';
+
+
+$('#submit-signin').on('click', () => {
+    Object.values($('#signin').children('input[type="text"], input[type="password"]'))
+    .forEach(elem => {
+        $(elem).addClass('submitted');
+    });
+});
