@@ -13,6 +13,9 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\UserRepository;
+use App\Entity\User;
+use App\Form\UserSignupType;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class SecurityController extends AbstractController
 {
@@ -21,22 +24,55 @@ class SecurityController extends AbstractController
     const VERIFICATION_EMAIL_VALIDATED = 'VERIFICATION_EMAIL_VALIDATED';
     const VERIFICATION_EMAIL_FAILED = 'VERIFICATION_EMAIL_FAILED';
 
-    #[Route('/login', name: 'login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    #[Route('/login', name: 'app_login')]
+    public function login(AuthenticationUtils $authenticationUtils, UserPasswordHasherInterface $passwordHasher, Request $request, UserRepository $userRepository): Response
     {
-         // get the login error if there is one
-         $error = $authenticationUtils->getLastAuthenticationError();
-
-         // last username entered by the user
-         $lastUsername = $authenticationUtils->getLastUsername();
+        $user = new User();
+        $form = $this->createForm(UserSignupType::class, $user);
+        
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
          
-         return $this->render('security/login.html.twig', [
-             'last_username' => $lastUsername,
-             'error'         => $error,
-         ]);
+        return $this->renderForm('security/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+            'user' => $user,
+            'form' => $form
+        ]);
     }
 
-    #[Route('/logout', name: 'logout')]
+    #[Route('/signup', name: 'app_signup')]
+    public function signup(UserPasswordHasherInterface $passwordHasher, Request $request, UserRepository $userRepository): Response
+    {
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+
+        $form->handleRequest($request);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $plaintextPassword = $user->getPassword1();
+
+            // hash the password (based on the security.yaml config for the $user class)
+            $hashedPassword = $passwordHasher->hashPassword(
+                $user,
+                $plaintextPassword
+            );
+            $user->setPassword($hashedPassword);
+            $userRepository->add($user);
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('security/login.html.twig', [
+            'last_username' => null,
+            'error' => null,
+            'user' => $user,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/logout', name: 'app_logout')]
     public function logout(): void
     {
         // controller can be blank: it will never be called!
