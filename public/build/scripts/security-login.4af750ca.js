@@ -6,6 +6,7 @@ $('#submit-signin').on('click', () => {
 });
 
 $('#signup-modal-body').on('submit', e => {
+    alert('whuuuuut?!?!');
     Object.values($('#signup-modal-body').find('input[type="text"], input[type="password"], input[type="email"]'))
     .forEach(elem => {
         $(elem).addClass('submitted');

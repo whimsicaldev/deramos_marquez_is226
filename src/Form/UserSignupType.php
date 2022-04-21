@@ -8,15 +8,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
 use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserSignupType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('password1')
-            ->add('password2')
+            ->add('email', EmailType::class)
+            ->add('password1', PasswordType::class)
+            ->add('password2', PasswordType::class)
             ->add('captcha', Recaptcha3Type::class, [
                 'constraints' => new Recaptcha3([
                     'message' => 'There were problems with your captcha. Please try again or contact with support and provide following code(s): {{ errorCodes }}'
@@ -29,6 +31,7 @@ class UserSignupType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'error_bubbling' => true,
         ]);
     }
 }
