@@ -1,9 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ app.user.nickname }} | Verify Email{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('build/styles/security-verify.css') }}" rel="stylesheet"/>
 {% endblock %}
-
-{% extends 'base.html.twig' %}
 
 {% block body %}
 {% include "header.html.twig" %}

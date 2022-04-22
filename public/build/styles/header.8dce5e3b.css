@@ -11,6 +11,7 @@
     height: 64px;
 }
 
-.bi {
-    margin-right: 5px;
+.option-button {
+    border-radius: 25px;
+    padding: 6px 10px;
 }

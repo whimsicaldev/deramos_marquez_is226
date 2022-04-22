@@ -48,7 +48,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            {{ include('security/_form.html.twig') }}
+            {{ include('security/_form-signup.html.twig') }}
         </div>
     </div>
 </div>
@@ -56,9 +56,9 @@
 
 {% block onloadedscripts %}
     <script src="{{ asset('build/scripts/security-login.js') }}"></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LcedogfAAAAANqaz0R-XyZNVwhrLGo-z32q712I"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_key }}"></script>
     <script>
-        const siteKey = '6LcedogfAAAAANqaz0R-XyZNVwhrLGo-z32q712I';
+        const siteKey = "{{ recaptcha_key }}";
 
         //either on page load
         grecaptcha.ready(function() {

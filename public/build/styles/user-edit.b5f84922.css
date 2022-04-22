@@ -1,0 +1,16 @@
+.row {
+    margin-top: 30px;
+}
+
+input {
+    border: solid black 1px !important;
+    background: transparent;
+    margin-right: 1%;
+    width: 39%;
+    padding: 5px 0px 10px 10px;
+    margin-bottom: 20px;
+}
+
+.top-0 {
+    top: 4rem !important;
+}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\UserPasswordType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,38 +23,6 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/bootstrap', name: 'app_user_bootstrap', methods: ['GET'])]
-    public function bootstrap(): Response
-    {
-        return $this->render('user/bootstrap.html.twig');
-    }
-
-    #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
-    public function new(UserPasswordHasherInterface $passwordHasher, Request $request, UserRepository $userRepository): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $plaintextPassword = $user->getPassword();
-
-            // hash the password (based on the security.yaml config for the $user class)
-            $hashedPassword = $passwordHasher->hashPassword(
-                $user,
-                $plaintextPassword
-            );
-            $user->setPassword($hashedPassword);
-            $userRepository->add($user);
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('user/new.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
-
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
@@ -63,19 +32,45 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserRepository $userRepository): Response
+    public function edit(UserPasswordHasherInterface $passwordHasher, Request $request, User $user, UserRepository $userRepository): Response
     {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        $toast = null;
+        $userForm = $this->createForm(UserType::class, $user);
+        $userPasswordForm = $this->createForm(UserPasswordType::class, $user);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $userForm->handleRequest($request);
+        $userPasswordForm->handleRequest($request);
+
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
+            $existingUser = $userRepository->loadUserByIdentifier($user->getUsername());
+
+            if($existingUser != null) {
+                $form
+                    ->get('username')
+                    ->addError(new FormError('Username is already in use.'));
+            } else {
+                $userRepository->add($user);
+                $toast = "Profile successfully updated.";
+            }
+        } else if ($userPasswordForm->isSubmitted() && $userPasswordForm->isValid()) {
+            $plaintextPassword = $user->getPassword1();
+
+            // hash the password (based on the security.yaml config for the $user class)
+            $hashedPassword = $passwordHasher->hashPassword(
+                $user,
+                $plaintextPassword
+            );
+            $user->setPassword($hashedPassword);
+
             $userRepository->add($user);
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            $toast = "Password successfully changed.";
         }
 
         return $this->renderForm('user/edit.html.twig', [
             'user' => $user,
-            'form' => $form,
+            'userForm' => $userForm,
+            'userPasswordForm' => $userPasswordForm,
+            'toast' => $toast
         ]);
     }
 

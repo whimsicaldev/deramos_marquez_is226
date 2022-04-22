@@ -1,13 +1,59 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}{{ app.user.nickname }} | Edit Profile{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('build/styles/user-edit.css') }}" rel="stylesheet"/>
+{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
+{% include "header.html.twig" %}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Update Profile</h5>
+                    {{ include('user/_form-update-profile.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
 
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Change Password</h5>
+                    {{ include('user/_form-change-password.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+{% block modal %}
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+    <div class="toast align-items-center bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                {{ toast }}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
-    {{ include('user/_delete_form.html.twig') }}
+{% block onloadedscripts %}
+<script>
+    let toastMessage = '{{ toast }}';
+    $(document).ready(function() {
+        if(toastMessage) {
+            $(".toast").toast('show');
+        }
+    });
+</script>
 {% endblock %}

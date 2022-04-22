@@ -62,7 +62,9 @@ class SecurityController extends AbstractController
             $existingUser = $userRepository->loadUserByIdentifier($user->getEmail());
 
             if($existingUser != null) {
-                $form->addError(new FormError('Email is already in use.'));
+                $form
+                    ->get('email')
+                    ->addError(new FormError('Email is already in use.'));
             } else {
                 $plaintextPassword = $user->getPassword1();
 
@@ -72,6 +74,7 @@ class SecurityController extends AbstractController
                     $plaintextPassword
                 );
                 $user->setPassword($hashedPassword);
+                $user->setNickname(strtok($user->getEmail(), '@'));
                 $userRepository->add($user);
                 
                 // return $this->redirectToRoute('app_verify', [], Response::HTTP_SEE_OTHER);

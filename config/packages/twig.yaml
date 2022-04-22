@@ -3,6 +3,8 @@ twig:
     paths:
         '%kernel.project_dir%/assets/styles': styles
         '%kernel.project_dir%/assets/images': images
+    globals:
+        recaptcha_key: '%env(RECAPTCHA3_KEY)%'
 
 when@test:
     twig:

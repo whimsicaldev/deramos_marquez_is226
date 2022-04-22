@@ -2,11 +2,12 @@
   "build/app.js": "/build/app.js",
   "build/runtime.js": "/build/runtime.js",
   "build/images/logo.png": "/build/images/logo.7d2e9fff.png",
-  "build/styles/security-login.css": "/build/styles/security-login.3a373961.css",
+  "build/styles/security-login.css": "/build/styles/security-login.6b9df429.css",
   "build/images/background.png": "/build/images/background.90fda63a.png",
   "build/scripts/security-login.js": "/build/scripts/security-login.d4ced517.js",
   "build/styles/email-template-verify-email.css": "/build/styles/email-template-verify-email.b004be2f.css",
-  "build/styles/header.css": "/build/styles/header.3df9c34b.css",
+  "build/styles/header.css": "/build/styles/header.dd85ef2d.css",
   "build/styles/base.css": "/build/styles/base.81846791.css",
-  "build/styles/security-verify.css": "/build/styles/security-verify.e11f12d9.css"
+  "build/styles/security-verify.css": "/build/styles/security-verify.e11f12d9.css",
+  "build/styles/user-edit.css": "/build/styles/user-edit.c1632e30.css"
 }

@@ -46,7 +46,7 @@ class OAuthUserProvider extends ServiceEntityRepository implements UserLoaderInt
             $user->setFirstname($response->getFirstName());
             $user->setLastname($response->getLastName());
             $user->setUsername($response->getUserName());
-            $user->setNickname($response->getNickname());
+            $user->setNickname(!$response->getNickname()? $response->getNickname(): strtok($response->getEmail(), '@'));
             $user->setIsVerified(false);
         }
         
