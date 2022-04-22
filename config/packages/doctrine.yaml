@@ -3,6 +3,7 @@ doctrine:
         url: '%env(resolve:DATABASE_URL)%'
         types:
             enumconnection: App\DBAL\EnumConnectionType
+            enumcategory: App\DBAL\EnumCategoryType
         mapping_types:
             enum: string
 
