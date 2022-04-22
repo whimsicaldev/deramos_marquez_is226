@@ -6,10 +6,6 @@
     border: solid black 1px !important;
     background: transparent;
     padding: 5px 0px 10px 10px;
-    margin-bottom: 0px;
-}
-
-.form-group {
     margin-bottom: 20px;
 }
 
@@ -27,8 +23,4 @@
 
 .form-group > input.submitted:invalid::placeholder {
     color: rgb(255, 58, 36);
-}
-
-.form-text {
-    position: absolute
 }

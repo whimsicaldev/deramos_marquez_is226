@@ -14,7 +14,7 @@
         <div class="col col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Update Profile</h5>
+                    <h4 class="card-title">Update Profile</h4>
                     {{ include('user/_form-update-profile.html.twig') }}
                 </div>
             </div>
@@ -25,7 +25,7 @@
         <div class="col col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Change Password</h5>
+                    <h4 class="card-title">Change Password</h4>
                     {{ include('user/_form-change-password.html.twig') }}
                 </div>
             </div>
@@ -53,6 +53,25 @@
     $(document).ready(function() {
         if(toastMessage) {
             $(".toast").toast('show');
+        }
+    });
+
+    $('#password-change-form').on('submit', e => {
+        Object.values($('#password-change-form').find('input[type="password"]'))
+            .forEach(elem => {
+                $(elem).addClass('submitted');
+            });
+
+        if($('#user_password_password1').val() !== $('#user_password_password2').val()) {
+            e.preventDefault();
+            e.stopPropagation();
+            $('#user_password_password1')[0].setCustomValidity("Invalid field.");
+            $('#user_password_password2')[0].setCustomValidity("Invalid field.");
+            $('#change-password-help').text('Passwords did not match.');
+        } else {
+            $('#user_password_password1')[0].setCustomValidity();
+            $('#user_password_password2')[0].setCustomValidity();
+            $('#change-password-help').text('');
         }
     });
 </script>
