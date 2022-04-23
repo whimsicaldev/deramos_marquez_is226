@@ -2,27 +2,28 @@
 
 namespace App\Form;
 
-use App\Entity\Connection;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ConnectionType extends AbstractType
+class Category1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('amount')
-            ->add('status')
-            ->add('user')
-            ->add('peer')
+            ->add('name')
+            ->add('description')
+            ->add('type')
+            ->add('icon')
+            ->add('iconColor')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Connection::class,
+            'data_class' => Category::class,
         ]);
     }
 }
