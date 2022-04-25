@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login // MayUtangBa.Me?{% endblock %}
+
+{% block body %}
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="../../assets/styles/base.css" />
+        <noscript><link rel="stylesheet" href="../../assets/styles/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+            <div id="wrapper">
+                    <header id="header">
+                        <a href="#" class="logo">MayUtangBa.Me?</a>
+                    </header>
+                    <nav id="nav">
+                        <ul class="links">
+                            <li><a href="#PakiConnectSaSignUpForm">Signup</a></li>
+                            <li class="active"><a href="#">Login</a></li>
+                        </ul>
+                    </nav>
+                    <div id="main">
+                        <section class="post">
+                            <!-- Form -->
+                            <h2>Log into your account</h2>
+                            <form method="post" action="#">
+                                <div class="row gtr-uniform">
+                                    <div class="col-6 col-12-xsmall">
+                                        <input type="text" name="email-username" id="demo-name" value="" placeholder="Email or username" />
+                                    </div>
+                                    <div class="col-6 col-12-xsmall">
+                                        <input type="password" name="demo-pw" id="demo-email" value="" placeholder="Password" />
+                                    </div>
+                                    
+                                    <div class="col-12">
+                                        <ul class="actions">
+                                            <li><input type="submit" value="Log In" class="primary" /></li>
+                                            <li><input type="button" href="/connect/google" name="google-signin" class="google" value="Continue with Google" /></li>
+                                        </ul>
+                                        <p><a href="#">Forgot password?</a></p>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr />
+                        </section>
+                    </div>
+
+                <!-- Copyright -->
+                    <div id="copyright">
+                        <ul><li>&copy; MayUtangBa.Me?</li></ul>
+                    </div>
+
+            </div>
+
+            <script src="../../assets/js/jquery.min.js"></script>
+            <script src="../../assets/js/jquery.scrollex.min.js"></script>
+            <script src="../../assets/js/jquery.scrolly.min.js"></script>
+            <script src="../../assets/js/browser.min.js"></script>
+            <script src="../../assets/js/breakpoints.min.js"></script>
+            <script src="../../assets/js/util.js"></script>
+            <script src="../../assets/js/main.js"></script>
+
+    </body>
+{% endblock %}
