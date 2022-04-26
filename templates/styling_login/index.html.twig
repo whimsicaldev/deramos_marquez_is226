@@ -1,20 +1,29 @@
-{% extends 'base.html.twig' %}
+{% extends 'test.base.html.twig' %}
 
 {% block title %}Login // MayUtangBa.Me?{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <noscript><link rel="stylesheet" href="{{ asset('build/styles/noscript.css') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/styles/fontawesome-all.min.css') }}" /></noscript>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/scripts/jquery.min.js') }}"></script>
+    <script src="{{ asset('build/scripts/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ asset('build/scripts/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ asset('build/scripts/browser.min.js') }}"></script>
+    <script src="{{ asset('build/scripts/breakpoints.min.js') }}"></script>
+    <script src="{{ asset('build/scripts/util.js') }}"></script>
+    <script src="{{ asset('build/scripts/main.js') }}"></script>
+{% endblock %}
+
 {% block body %}
 
-<head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="../../assets/styles/base.css" />
-        <noscript><link rel="stylesheet" href="../../assets/styles/noscript.css" /></noscript>
-</head>
-
-<body class="is-preload">
             <div id="wrapper">
                     <header id="header">
-                        <a href="#" class="logo">MayUtangBa.Me?</a>
+                        <a class="logo">MayUtangBa.Me?</a>
                     </header>
                     <nav id="nav">
                         <ul class="links">
@@ -55,13 +64,4 @@
 
             </div>
 
-            <script src="../../assets/js/jquery.min.js"></script>
-            <script src="../../assets/js/jquery.scrollex.min.js"></script>
-            <script src="../../assets/js/jquery.scrolly.min.js"></script>
-            <script src="../../assets/js/browser.min.js"></script>
-            <script src="../../assets/js/breakpoints.min.js"></script>
-            <script src="../../assets/js/util.js"></script>
-            <script src="../../assets/js/main.js"></script>
-
-    </body>
 {% endblock %}
