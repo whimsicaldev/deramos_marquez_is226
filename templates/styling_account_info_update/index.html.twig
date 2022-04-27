@@ -29,12 +29,12 @@
                             <li><a href="#">Expenses</a></li>
                             <li><a href="#">Contact</a></li>
                             <li class="active"><a href="#">Account</a></li>
-                            <li><a href="#">[name] Logout</a></li>
+                            <li><a href="#">[first name] Logout</a></li>
                         </ul>
                     </nav>
                     <div id="main">
                         <section class="post">
-                            <h2>Create your account</h2>
+                            <h2>Account Information</h2>
                             <form method="post" action="#">
                                 <div class="row gtr-uniform">
                                     <div class="col-6 col-12-xsmall">
@@ -44,8 +44,8 @@
                                         <input type="text" name="lastName" id="lastName" value="" placeholder="Last name" />
                                     </div>
 
-                                    <div class="col-12 col-12-xsmall">
-                                        <input type="text" name="username" id="username" value="" placeholder="Username" />
+                                    <div class="col-12 col-12-xsmall" title="Username cannot be changed.">
+                                        <input type="text" name="username" id="username" value="" placeholder="Username" disabled />
                                     </div>
                                     <div class="col-12 col-12-xsmall">
                                         <input type="email" name="email" id="email" value="" placeholder="Email" />
@@ -60,11 +60,9 @@
                                     
                                     <div class="col-12">
                                         <ul class="actions">
-                                            <li><input type="submit" value="Sign Up" class="primary" /></li>
-                                            <li><input type="button" href="/connect/google" name="google-signin" class="google" value="Continue with Google" /></li>
+                                            <li><input type="submit" value="Save" class="primary" /></li>
                                         </ul>
-                                        <p><a href="#">Log in instead?</a></p>
-                                    </div>
+                                    </div>  
                                 </div>
                             </form>
                             <hr />
