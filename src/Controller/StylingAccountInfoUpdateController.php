@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StylingAccountInfoUpdateController extends AbstractController
 {
-    #[Route('/accountinfoupdate', name: 'app_styling_account_info_update')]
+    #[Route('/stylingaccountinfoupdate', name: 'app_styling_account_info_update')]
     public function index(): Response
     {
         return $this->render('styling_account_info_update/index.html.twig', [
