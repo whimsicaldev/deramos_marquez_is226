@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -19,7 +20,7 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(UserPasswordHasherInterface $passwordHasher, Request $request, User $user, UserRepository $userRepository): Response
     {
-        $toast = null;
+        $updateMessage = null;
         $userForm = $this->createForm(UserType::class, $user);
         $userPasswordForm = $this->createForm(UserPasswordType::class, $user);
 
@@ -29,11 +30,11 @@ class UserController extends AbstractController
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             $existingUser = $userRepository->loadUserByIdentifier($user->getUsername());
 
-            if($existingUser != null) {
+            if($existingUser != null && $existingUser->getId() != $user->getId()) {
                 $userForm->addError(new FormError('Username is already in use.'));
             } else {
                 $userRepository->add($user);
-                $toast = "Profile successfully updated.";
+                $updateMessage = "Profile successfully updated.";
             }
         } else if ($userPasswordForm->isSubmitted() && $userPasswordForm->isValid()) {
             $plaintextPassword = $user->getPassword1();
@@ -46,14 +47,23 @@ class UserController extends AbstractController
             $user->setPassword($hashedPassword);
 
             $userRepository->add($user);
-            $toast = "Password successfully changed.";
+            $updateMessage = "Password successfully changed.";
         }
 
         return $this->renderForm('user/edit.html.twig', [
             'user' => $user,
             'userForm' => $userForm,
             'userPasswordForm' => $userPasswordForm,
-            'toast' => $toast
+            'updateMessage' => $updateMessage
+        ]);
+    }
+
+    #[Route('/{email}/view', name: 'app_user_search', methods: ['GET'])]
+    #[Entity('user', expr: 'repository.loadUserByEmail(email)')]
+    public function view(string $email, Request $request, UserRepository $userRepository, User $user = null): Response
+    {
+        return $this->renderForm('user/view.html.twig', [
+            'user' => $user
         ]);
     }
 
@@ -64,6 +74,6 @@ class UserController extends AbstractController
             $userRepository->remove($user);
         }
 
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -36,10 +36,10 @@
 
 {% block modal %}
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
-    <div class="toast align-items-center bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="update-message" class="toast align-items-center bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                {{ toast }}
+                {{ updateMessage }}
             </div>
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
@@ -49,10 +49,10 @@
 
 {% block onloadedscripts %}
 <script>
-    let toastMessage = '{{ toast }}';
+    let updateMessage = '{{ updateMessage }}';
     $(document).ready(function() {
-        if(toastMessage) {
-            $(".toast").toast('show');
+        if(updateMessage) {
+            $(".update-message").toast('show');
         }
     });
 

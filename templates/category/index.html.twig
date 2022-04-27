@@ -1,33 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Category index{% endblock %}
+{% block title %}{{ app.user.nickname }} | Expense Category {% endblock %}
 
 {% block body %}
-    <h1>Category index</h1>
+{% include "header.html.twig" %}
+    <h1>Expense Categories</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
+
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Type</th>
                 <th>Icon</th>
-                <th>IconColor</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for category in categories %}
             <tr>
-                <td>{{ category.id }}</td>
                 <td>{{ category.name }}</td>
                 <td>{{ category.description }}</td>
-                <td>{{ category.type }}</td>
-                <td>{{ category.icon }}</td>
-                <td>{{ category.iconColor }}</td>
+                <td class="alert alert-primary">
+                    <button type="button" class="btn btn-outline-primary">
+                        <span class="bi {{ category.icon}}"></span>
+                    </button>
+                </td>
                 <td>
-                    <a href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
                     <a href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
                 </td>
             </tr>

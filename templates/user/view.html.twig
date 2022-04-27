@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ user.nickname }} | View User{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('build/styles/user-edit.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+{% include "header.html.twig" %}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-8">
+            <div class="alert alert-info">
+                <h4 class="card-title">{{ user.nickname }}</h4>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
