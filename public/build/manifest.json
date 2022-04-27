@@ -1,9 +1,9 @@
 {
   "build/app.js": "/build/app.js",
   "build/runtime.js": "/build/runtime.js",
-  "build/images/background.png": "/build/images/background.3ca2208d.png",
   "build/styles/webfonts/fa-solid-900.svg": "/build/styles/webfonts/fa-solid-900.45690f43.svg",
   "build/styles/webfonts/fa-brands-400.svg": "/build/styles/webfonts/fa-brands-400.675f6734.svg",
+  "build/images/background.jpg": "/build/images/background.4bebc897.jpg",
   "build/styles/webfonts/fa-solid-900.eot": "/build/styles/webfonts/fa-solid-900.9bbb245e.eot",
   "build/styles/webfonts/fa-solid-900.ttf": "/build/styles/webfonts/fa-solid-900.be9ee23c.ttf",
   "build/styles/webfonts/fa-regular-400.svg": "/build/styles/webfonts/fa-regular-400.0772874a.svg",
@@ -48,8 +48,8 @@
   "build/styles/sass/main.scss": "/build/styles/sass/main.baa6e5b5.scss",
   "build/styles/sass/components/_section.scss": "/build/styles/sass/components/_section.e966e62c.scss",
   "build/styles/sass/layout/_header.scss": "/build/styles/sass/layout/_header.16141812.scss",
-  "build/styles/sass/base/_reset.scss": "/build/styles/sass/base/_reset.44e7ebb4.scss",
   "build/styles/sass/layout/_wrapper.scss": "/build/styles/sass/layout/_wrapper.0c2be9c7.scss",
+  "build/styles/sass/base/_reset.scss": "/build/styles/sass/base/_reset.44e7ebb4.scss",
   "build/styles/sass/components/_list.scss": "/build/styles/sass/components/_list.c88fab2a.scss",
   "build/styles/sass/libs/_vars.scss": "/build/styles/sass/libs/_vars.2bcc0df3.scss",
   "build/styles/sass/components/_image.scss": "/build/styles/sass/components/_image.88049d5c.scss",
@@ -65,5 +65,6 @@
   "build/styles/sass/components/_box.scss": "/build/styles/sass/components/_box.53b4b9c8.scss",
   "build/styles/header.css": "/build/styles/header.84b87002.css",
   "build/styles/sass/components/_icon.scss": "/build/styles/sass/components/_icon.da9cd067.scss",
-  "build/styles/security-verify.css": "/build/styles/security-verify.e11f12d9.css"
+  "build/styles/security-verify.css": "/build/styles/security-verify.e11f12d9.css",
+  "build/images/background.png": "/build/images/background.3ca2208d.png"
 }
