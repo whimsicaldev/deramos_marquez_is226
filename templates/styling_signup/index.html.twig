@@ -1,6 +1,6 @@
 {% extends 'test.base.html.twig' %}
 
-{% block title %}Login // MayUtangBa.Me?{% endblock %}
+{% block title %}Signup // MayUtangBa.Me?{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -26,20 +26,20 @@
                     </header>
                     <nav id="nav">
                         <ul class="links">
-                            <li><a href="#PakiConnectSaSignUpForm">Signup</a></li>
-                            <li class="active"><a href="#">Login</a></li>
+                            <li class="active"><a href="#">Signup</a></li>
+                            <li><a href="#PakiConnectSaLogInForm">Login</a></li>
                         </ul>
                     </nav>
                     <div id="main">
                         <section class="post">
-                            <h2>Log into your account</h2>
+                            <h2>Create your account</h2>
                             <form method="post" action="#">
                                 <div class="row gtr-uniform">
                                     <div class="col-6 col-12-xsmall">
-                                        <input type="text" name="email-username" id="email" value="" placeholder="Email or username" />
+                                        <input type="text" name="firstName" id="demo-name" value="" placeholder="First name" />
                                     </div>
                                     <div class="col-6 col-12-xsmall">
-                                        <input type="password" name="pw" id="pw" value="" placeholder="Password" />
+                                        <input type="password" name="demo-pw" id="demo-email" value="" placeholder="Password" />
                                     </div>
                                     
                                     <div class="col-12">

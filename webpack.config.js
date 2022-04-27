@@ -78,7 +78,7 @@ Encore
     .copyFiles({
         from: './assets/styles',
         to: 'styles/[path][name].[hash:8].[ext]',
-        pattern: /\.(css)$/
+        pattern: /\.(css|scss|eot|svg|ttf|woff|woff2)$/
     })
     .copyFiles({
         from: './assets/scripts',
