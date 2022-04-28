@@ -85,6 +85,31 @@ Encore
         to: 'scripts/[path][name].[hash:8].[ext]',
         pattern: /\.(js)$/
     })
+    .copyFiles({
+        from: './assets/external',
+        to: 'external/[path][name].[ext]',
+        pattern: /\.(png|jpg|jpeg)$/
+    })
+    .copyFiles({
+        from: './assets/external',
+        to: 'external/[path][name].[ext]',
+        pattern: /\.(css)$/
+    })
+    .copyFiles({
+        from: './assets/external',
+        to: 'external/[path][name].[ext]',
+        pattern: /\.(js)$/
+    })
+    .copyFiles({
+        from: './assets/external',
+        to: 'external/[path][name].[ext]',
+        pattern: /\.(scss)$/
+    })
+    .copyFiles({
+        from: './assets/external',
+        to: 'external/[path][name].[ext]',
+        pattern: /\.(eot|svg|ttf|woff|woff2)$/
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();
