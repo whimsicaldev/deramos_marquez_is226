@@ -1,6 +1,6 @@
 {% extends 'test.base.html.twig' %}
 
-{% block title %}Login // MayUtangBa.Me?{% endblock %}
+{% block title %}Login / MayUtangBa.Me?{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,12 +10,12 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('build/scripts/jquery.min.js') }}"></script>
-    <script src="{{ asset('build/scripts/jquery.scrollex.min.js') }}"></script>
-    <script src="{{ asset('build/scripts/jquery.scrolly.min.js') }}"></script>
-    <script src="{{ asset('build/scripts/browser.min.js') }}"></script>
-    <script src="{{ asset('build/scripts/breakpoints.min.js') }}"></script>
-    <script src="{{ asset('build/scripts/util.js') }}"></script>
+    <script src="{{ asset('build/external/scripts/jquery.min.js') }}"></script>
+    <script src="{{ asset('build/external/scripts/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ asset('build/external/scripts/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ asset('build/external/scripts/browser.min.js') }}"></script>
+    <script src="{{ asset('build/external/scripts/breakpoints.min.js') }}"></script>
+    <script src="{{ asset('build/external/scripts/util.js') }}"></script>
     <script src="{{ asset('build/scripts/main.js') }}"></script>
 {% endblock %}
 
