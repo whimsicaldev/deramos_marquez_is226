@@ -72,7 +72,7 @@ Encore
     .autoProvidejQuery()
     .copyFiles({
         from: './assets/images',
-        to: 'images/[path][name].[hash:8].[ext]',
+        to: 'images/[path][name].[ext]',
         pattern: /\.(png|jpg|jpeg)$/
     })
     .copyFiles({
@@ -83,6 +83,16 @@ Encore
     .copyFiles({
         from: './assets/scripts',
         to: 'scripts/[path][name].[hash:8].[ext]',
+        pattern: /\.(js)$/
+    })
+    .copyFiles({
+        from: './assets/external/styles',
+        to: 'external/styles/[path][name].[ext]',
+        pattern: /\.(css)$/
+    })
+    .copyFiles({
+        from: './assets/external/scripts',
+        to: 'external/scripts/[path][name].[ext]',
         pattern: /\.(js)$/
     })
 ;
