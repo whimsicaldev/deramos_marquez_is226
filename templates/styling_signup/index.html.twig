@@ -29,33 +29,40 @@
                     <div id="main">
                         <section class="post">
                             <h2>Create your account</h2>
-
                             <form method="post" action="#">
                                 <div class="row gtr-uniform">
                                     <div class="col-6 col-12-xsmall">
-                                        <input type="email" name="#" id="#" value="" placeholder="Email or username" />
+                                        <input type="text" name="firstName" id="firstName" value="" placeholder="First name" />
                                     </div>
                                     <div class="col-6 col-12-xsmall">
-                                        <input type="password" name="#" id="#" value="" placeholder="Password" />
+                                        <input type="text" name="lastName" id="lastName" value="" placeholder="Last name" />
                                     </div>
-                                    <div class="col-6 col-12-small">
-                                        <input type="checkbox" id="human" name="human" checked>
-                                        <label for="human">I am a human</label>
-                                    </div> 
+
+                                    <div class="col-12 col-12-xsmall">
+                                        <input type="text" name="username" id="username" value="" placeholder="Username" />
+                                    </div>
+                                    <div class="col-12 col-12-xsmall">
+                                        <input type="email" name="email" id="email" value="" placeholder="Email" />
+                                    </div>
+
+                                    <div class="col-6 col-12-xsmall">
+                                        <input type="password" name="password" id="password" value="" placeholder="Password" />
+                                    </div>
+                                    <div class="col-6 col-12-xsmall">
+                                        <input type="password" name="password" id="password" value="" placeholder="Retype password" />
+                                    </div>
+                                    
                                     <div class="col-12">
                                         <ul class="actions">
-                                            <li><input type="submit" value="Log In" class="primary" /></li>
+                                            <li><input type="submit" value="Sign Up" class="primary" /></li>
+                                            <li><input type="button" href="/connect/google" name="google-signin" class="google" value="Continue with Google" /></li>
                                         </ul>
+                                        <p><a href="#">Log in instead?</a></p>
                                     </div>
-                                    <p><a href="#">Forgot password?</a>
-                                    <br />
-                                    <a href="#">Login instead?</a></p>
                                 </div>
                             </form>
-
                             <hr />
                         </section>
-
                     </div>
 
                     <div id="copyright">
