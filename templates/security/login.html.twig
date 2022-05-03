@@ -2,43 +2,67 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href="{{ asset('build/styles/security-login.css') }}" rel="stylesheet"/>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/styles/noscript.css') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/styles/fontawesome-all.min.css') }}" /></noscript>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/external/scripts/jquery.min.js') }}"></script>
+    <script src="{{ asset('build/external/scripts/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ asset('build/external/scripts/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ asset('build/external/scripts/browser.min.js') }}"></script>
+    <script src="{{ asset('build/external/scripts/breakpoints.min.js') }}"></script>
+    <script src="{{ asset('build/external/scripts/util.js') }}"></script>
+    <script src="{{ asset('build/scripts/main.js') }}"></script>
 {% endblock %}
 
 {% block body %}
-    <div class="col-md-6 logo-container">
-        <div id="logo" style="background-image: url({{ asset('build/images/logo.png') }})"></div>
-    </div>
-    <div class="col-md-6 signin-container">
-        <div class="signin-control">
-            <div class="welcome-message">
-                <h1>Welcome</h1>
-                <p>Keeping track of our expenses in relation with our friends and families has been a constant challenge for every Filipinos nowadays. More than anything, we would want to ensure that we get the best out of our spending. We are here to help you treasure what you value most.</p>
-            </div>
-            <div class="signin-form">
-                <form action="{{ path('app_login') }}" method="post" id="signin">
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username" required/>
-                    <input type="password" id="password" name="_password" placeholder="Password"  required/>
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                    <button type="submit" class="btn btn-dark" id="submit-signin"><span class="bi bi-box-arrow-right"></span> Sign In</button>
+    <div id="wrapper">
+        <header id="header">
+            <a class="logo">MayUtangBa.Me?</a>
+        </header>
+        <nav id="nav">
+            <ul class="links">
+                <li><a href="#PakiConnectSaSignUpForm">Signup</a></li>
+                <li class="active"><a href="#">Login</a></li>
+            </ul>
+        </nav>
+        <div id="main">
+            <section class="post">
+                <!-- Form -->
+                <h2>Log into your account</h2>
+               <form action="{{ path('app_login') }}" method="post" id="signin">
+                    <div class="row gtr-uniform">
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username or email" required/>
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="password" id="password" name="_password" placeholder="Password"  required/>
+                        </div>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Log In" class="primary" /></li>
+                                <li><input type="button" onclick="location.href='{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}';" class="google" value="Continue with Google" /></li>
+                            </ul>
+                            <p><a href="#">Forgot password?</a></p>
+                        </div>
+                    </div>
                 </form>
-                {% if error %}
-                    <div class="text-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
-            </div>
-            <div class="signin-auth">
-                <hr/>
-                <button class="btn btn-lg btn-dark" data-bs-toggle="modal" data-bs-target="#signup-modal">
-                    <span class="bi bi-pencil-square"></span> Sign Up with Email
-                </button>
-                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}" class="btn btn-lg btn-danger">
-                    <span class="bi bi-google"></span> Sign In with Google
-                </a>
-            </div>
+                <hr />
+            </section>
         </div>
+
+        <!-- Copyright -->
+        <div id="copyright">
+            <ul><li>&copy; MayUtangBa.Me?</li></ul>
+        </div>
+
     </div>
 {% endblock %}
 
+{#
 {% block modal %}
 <div class="modal fade" id="signup-modal" tabindex="-1" aria-labelledby="signup-modal-label" aria-hidden="true">
     <div class="modal-dialog">
@@ -53,6 +77,7 @@
     </div>
 </div>
 {% endblock %}
+#}
 
 {% block onloadedscripts %}
     <script src="{{ asset('build/scripts/security-login.js') }}"></script>
