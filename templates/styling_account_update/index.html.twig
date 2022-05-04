@@ -1,20 +1,106 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StylingAccountUpdateController!{% endblock %}
+{% block title %}Signup // MayUtangBa.Me?{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/noscript.css') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/fontawesome-all.min.csss') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/main.css') }}" /></noscript>
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div id="wrapper">
+        <header id="header">
+            <a class="logo">MayUtangBa.Me?</a>
+        </header>
+        <nav id="nav">
+            <ul class="links">
+                <li><a href="#">Expenses</a></li>
+                <li><a href="#">Contact</a></li>
+                <li class="active"><a href="#">Account</a></li>
+                <li><a href="#">[first name] Logout</a></li>
+            </ul>
+        </nav>
+        <div id="main">
+            <section class="post">
+                <h2>Personal Information</h2>
+                <form method="post" action="#">
+                    <div class="row gtr-uniform">
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" name="firstName" id="firstName" value="" placeholder="First name" />
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" name="lastName" id="lastName" value="" placeholder="Last name" />
+                        </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Save" class="primary" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+                <hr />
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/jc.marquez/Downloads/jcmarquez/Github/deramos_marquez_is226/src/Controller/StylingAccountUpdateController.php'|file_link(0) }}">src/Controller/StylingAccountUpdateController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/jc.marquez/Downloads/jcmarquez/Github/deramos_marquez_is226/templates/styling_account_update/index.html.twig'|file_link(0) }}">templates/styling_account_update/index.html.twig</a></code></li>
-    </ul>
-</div>
+                <h2>Password and Security</h2>
+                <form method="post" action="#">
+                    <div class="row gtr-uniform">
+                        <div class="col-12 col-12-xsmall" title="Username cannot be changed.">
+                            <input type="text" name="username" id="username" value="" placeholder="Username" disabled />
+                        </div>
+                        <div class="col-12 col-12-xsmall">
+                            <input type="email" name="email" id="email" value="" placeholder="Email" />
+                        </div>
+
+                        <div class="col-6 col-12-xsmall">
+                            <input type="password" name="password" id="password" value="" placeholder="Password" />
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="password" name="password" id="password" value="" placeholder="Retype password" />
+                        </div>
+                        
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Save" class="primary" /></li>
+                            </ul>
+                        </div>  
+                    </div>
+                </form>
+                <hr />
+
+                <h2>Deactivation</h2>
+                <form method="post" action="#">
+                    <div class="row gtr-uniform">
+                        <div class="col-12 col-12-xsmall"">
+                            <input type="text" name="username" id="username" value="" placeholder="Type DEACTIVATE to proceed" />
+                        </div>
+                        
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Deactivate" class="button" /></li>
+                            </ul>
+                        </div>  
+                    </div>
+                </form>
+                <hr />
+            </section>
+        </div>
+
+        <div id="copyright">
+            <ul><li>&copy; MayUtangBa.Me?</li></ul>
+        </div>
+    </div>
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/external/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/browser.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/breakpoints.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/util.js') }}"></script>
+    <script src="{{ asset('build/external/js/main.js') }}"></script>
+{% endblock %}
+
 {% endblock %}
