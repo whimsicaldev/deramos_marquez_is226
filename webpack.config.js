@@ -86,14 +86,9 @@ Encore
         pattern: /\.(js)$/
     })
     .copyFiles({
-        from: './assets/external/styles',
-        to: 'external/styles/[path][name].[ext]',
-        pattern: /\.(css)$/
-    })
-    .copyFiles({
-        from: './assets/external/scripts',
-        to: 'external/scripts/[path][name].[ext]',
-        pattern: /\.(js)$/
+        from: './assets/external',
+        to: 'external/[path][name].[ext]',
+        pattern: /\.(css|js|eot|svg|ttf|woff|woff2|png|jpg|jpeg)$/
     })
 ;
 

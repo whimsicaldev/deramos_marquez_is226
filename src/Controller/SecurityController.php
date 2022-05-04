@@ -26,24 +26,18 @@ class SecurityController extends AbstractController
     const VERIFICATION_EMAIL_FAILED = 'VERIFICATION_EMAIL_FAILED';
 
     #[Route('/login', name: 'app_login')]
-    public function login(User $user = null, AuthenticationUtils $authenticationUtils, UserPasswordHasherInterface $passwordHasher, Request $request, UserRepository $userRepository): Response
+    public function login(User $user = null, AuthenticationUtils $authenticationUtils): Response
     {
         if($user != null) {
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 
-        $user = new User();
-        $form = $this->createForm(UserSignupType::class, $user);
-        
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
          
         return $this->renderForm('security/login.html.twig', [
             'last_username' => $lastUsername,
-            'error' => $error,
-            'user' => $user,
-            'form' => $form,
-            'showSignup' => false
+            'error' => $error
         ]);
     }
 
@@ -81,12 +75,9 @@ class SecurityController extends AbstractController
             }
         }
 
-        return $this->renderForm('security/login.html.twig', [
-            'last_username' => null,
-            'error' => null,
+        return $this->renderForm('security/signup.html.twig', [
             'user' => $user,
-            'form' => $form,
-            'showSignup' => true
+            'form' => $form
         ]);
     }
 

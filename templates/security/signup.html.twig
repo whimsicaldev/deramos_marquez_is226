@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Signup // MayUtangBa.Me?{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/noscript.css') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/fontawesome-all.min.csss') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/main.css') }}" /></noscript>
+{% endblock %}
+
+{% block body %}
+    <div id="wrapper">
+        <header id="header">
+            <a href="/" class="logo">MayUtangBa.Me?</a>
+        </header>
+
+        <nav id="nav">
+            <ul class="links">
+                <li class="active"><a href="#">Sign Up</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </nav>
+
+        <div id="main">
+            <section class="post">
+                <h2>Create your account</h2>
+                {{ form_start(form, { 'method': 'POST', 'action': path('app_signup'), 'attr': { 'id': 'signup-modal-body' }}) }}
+                    <div class="row gtr-uniform">
+                        <div class="col-12 col-12-xsmall">
+                            {{ form_widget(form.email, { 'attr': { 'placeholder': 'Email' }}) }}
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            {{ form_widget(form.password1, { 'attr': { 'class': 'form-control', 'placeholder': 'Password' }}) }}
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            {{ form_widget(form.password2, { 'attr': { 'class': 'form-control', 'placeholder': 'Re-enter Password' }}) }}
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="terms-and-conditions">
+                            <label class="form-check-label" for="terms-and-conditions">I agree with the terms and conditions.</label>
+                        </div>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Sign Up" class="primary" /></li>
+                            </ul>
+                            <p><a href="/login">Log in instead?</a></p>
+                        </div>
+                    </div>
+                {{ form_end(form) }}
+                <hr />
+            </section>
+        </div>
+
+        <div id="copyright">
+            <ul><li>&copy; MayUtangBa.Me?</li></ul>
+        </div>
+            </div>
+{% endblock %}
+
+{% block onloadedscripts %}
+    <script src="{{ asset('build/external/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/browser.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/breakpoints.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/util.js') }}"></script>
+    <script src="{{ asset('build/external/js/main.js') }}"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_key }}"></script>
+    <script>
+        const siteKey = "{{ recaptcha_key }}";
+
+        //either on page load
+        grecaptcha.ready(function() {
+            grecaptcha.execute(siteKey, {
+                action: 'app_user_new'
+            }).then(function(token) {
+                //the token will be sent on form submit
+                $('[name="user_signup"]').val(token);
+                //keep in mind that token expires in 120 seconds so it's better to add setTimeout.
+            });
+        });
+    </script>
+{% endblock %}
