@@ -3,9 +3,100 @@
 {% block title %}{{ app.user.nickname }} | Edit Profile{% endblock %}
 
 {% block stylesheets %}
-{{ parent() }}
-<link href="{{ asset('build/styles/user-edit.css') }}" rel="stylesheet"/>
+    {{ parent() }}
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/noscript.css') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/fontawesome-all.min.csss') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/main.css') }}" /></noscript>
 {% endblock %}
+
+{% block body %}
+    <div id="wrapper">
+        <header id="header">
+            <a class="logo">MayUtangBa.Me?</a>
+        </header>
+        <nav id="nav">
+            <ul class="links">
+                <li><a href="#">Expenses</a></li>
+                <li><a href="#">Contact</a></li>
+                <li class="active"><a href="#">Account</a></li>
+                <li><a href="/logout">[{{ app.user.nickname }}] Logout</a></li>
+            </ul>
+        </nav>
+        <div id="main">
+            <section class="post">
+                <h2>Personal Information</h2>
+                {{ include('user/_form-update-profile.html.twig') }}
+                <hr />
+
+                <h2>Password and Security</h2>
+                {{ include('user/_form-change-password.html.twig') }}
+                <hr />
+
+                <h2>Deactivation</h2>
+                <form method="post" action="#">
+                    <div class="row gtr-uniform">
+                        <div class="col-12 col-12-xsmall">
+                            <input type="text" name="username" id="username" value="" placeholder="Type DEACTIVATE to proceed" />
+                        </div>
+                        
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Deactivate" class="button" /></li>
+                            </ul>
+                        </div>  
+                    </div>
+                </form>
+                <hr />
+            </section>
+        </div>
+
+        <div id="copyright">
+            <ul><li>&copy; MayUtangBa.Me?</li></ul>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block onloadedscripts %}
+<script src="{{ asset('build/external/js/jquery.min.js') }}"></script>
+<script src="{{ asset('build/external/js/jquery.scrollex.min.js') }}"></script>
+<script src="{{ asset('build/external/js/jquery.scrolly.min.js') }}"></script>
+<script src="{{ asset('build/external/js/browser.min.js') }}"></script>
+<script src="{{ asset('build/external/js/breakpoints.min.js') }}"></script>
+<script src="{{ asset('build/external/js/util.js') }}"></script>
+<script src="{{ asset('build/external/js/main.js') }}"></script>
+<script>
+    let updateMessage = '{{ updateMessage }}';
+    $(document).ready(function() {
+        if(updateMessage) {
+            $(".update-message").toast('show');
+        }
+    });
+
+    $('#password-change-form').on('submit', e => {
+        Object.values($('#password-change-form').find('input[type="password"]'))
+            .forEach(elem => {
+                $(elem).addClass('submitted');
+            });
+
+        if($('#user_password_password1').val() !== $('#user_password_password2').val()) {
+            e.preventDefault();
+            e.stopPropagation();
+            $('#user_password_password1')[0].setCustomValidity("Invalid field.");
+            $('#user_password_password2')[0].setCustomValidity("Invalid field.");
+            $('#change-password-help').text('Passwords did not match.');
+        } else {
+            $('#user_password_password1')[0].setCustomValidity();
+            $('#user_password_password2')[0].setCustomValidity();
+            $('#change-password-help').text('');
+        }
+    });
+</script>
+{% endblock %}
+
+
+{#}
+
 
 {% block body %}
 {% include "header.html.twig" %}
@@ -15,7 +106,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Update Profile</h4>
-                    {{ include('user/_form-update-profile.html.twig') }}
+                    
                 </div>
             </div>
         </div>
@@ -47,32 +138,5 @@
 </div>
 {% endblock %}
 
-{% block onloadedscripts %}
-<script>
-    let updateMessage = '{{ updateMessage }}';
-    $(document).ready(function() {
-        if(updateMessage) {
-            $(".update-message").toast('show');
-        }
-    });
 
-    $('#password-change-form').on('submit', e => {
-        Object.values($('#password-change-form').find('input[type="password"]'))
-            .forEach(elem => {
-                $(elem).addClass('submitted');
-            });
-
-        if($('#user_password_password1').val() !== $('#user_password_password2').val()) {
-            e.preventDefault();
-            e.stopPropagation();
-            $('#user_password_password1')[0].setCustomValidity("Invalid field.");
-            $('#user_password_password2')[0].setCustomValidity("Invalid field.");
-            $('#change-password-help').text('Passwords did not match.');
-        } else {
-            $('#user_password_password1')[0].setCustomValidity();
-            $('#user_password_password2')[0].setCustomValidity();
-            $('#change-password-help').text('');
-        }
-    });
-</script>
-{% endblock %}
+{#}

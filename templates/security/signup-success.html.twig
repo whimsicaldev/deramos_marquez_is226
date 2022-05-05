@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Signup Successful // MayUtangBa.Me?{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/noscript.css') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/fontawesome-all.min.csss') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/main.css') }}" /></noscript>
+{% endblock %}
+
+{% block body %}
+    <div id="wrapper">
+        <header id="header">
+            <a href="/" class="logo">MayUtangBa.Me?</a>
+        </header>
+        <div id="main">
+            <section class="post">
+                <!-- Form -->
+                <h2>Signup Successful!</h2>
+                <p>Check your email to validate your account.</p>
+                <input type="button" onclick="location.href='/login';" value="Go to Login" />
+                <hr />
+            </section>
+        </div>
+
+        <!-- Copyright -->
+        <div id="copyright">
+            <ul><li>&copy; MayUtangBa.Me?</li></ul>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block onloadedscripts %}
+    <script src="{{ asset('build/external/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/browser.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/breakpoints.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/util.js') }}"></script>
+    <script src="{{ asset('build/external/js/main.js') }}"></script>
+{% endblock %}

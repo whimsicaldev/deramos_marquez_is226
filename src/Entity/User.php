@@ -52,6 +52,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private $password2;
 
+    #[ORM\Column(type: 'boolean')]
+    private $isDisabled = false;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $dateDisabled;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -211,6 +217,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsEmailVerificationSent(bool $isEmailVerificationSent): self
     {
         $this->isEmailVerificationSent = $isEmailVerificationSent;
+
+        return $this;
+    }
+
+    public function getIsDisabled(): ?bool
+    {
+        return $this->isDisabled;
+    }
+
+    public function setIsDisabled(bool $isDisabled): self
+    {
+        $this->isDisabled = $isDisabled;
+
+        return $this;
+    }
+
+    public function getDateDisabled(): ?\DateTimeInterface
+    {
+        return $this->dateDisabled;
+    }
+
+    public function setDateDisabled(?\DateTimeInterface $dateDisabled): self
+    {
+        $this->dateDisabled = $dateDisabled;
 
         return $this;
     }

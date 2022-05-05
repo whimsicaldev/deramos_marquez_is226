@@ -2230,6 +2230,18 @@ input, select, textarea {
 			.button.primary:hover {
 				background-color: #18bfef;
 			}
+			
+		.button.google {
+			background-color: #de5246;
+			box-shadow: none;
+			color: #de5246 !important;
+		}
+
+			input[type="button"].google:hover,
+			button.google:hover,
+			.button.google:hover {
+				background-color: #de5246;
+			}
 
 /* Form */
 
@@ -3217,7 +3229,7 @@ input, select, textarea {
 		-ms-transition: opacity 0.5s ease;
 		transition: opacity 0.5s ease;
 		position: relative;
-		z-index: 0;
+		z-index: 1;
 		overflow: hidden;
 	}
 

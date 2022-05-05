@@ -1,33 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ app.user.nickname }} | Verify Email{% endblock %}
+{% block title %}Verify Email // MayUtangBa.Me?{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href="{{ asset('build/styles/security-verify.css') }}" rel="stylesheet"/>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/noscript.css') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/fontawesome-all.min.csss') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/main.css') }}" /></noscript>
 {% endblock %}
 
 {% block body %}
-{% include "header.html.twig" %}
-<div class="d-flex justify-content-center p-2">
-    <div class="jumbotron verify-email-container">
-        <h1 class="display-4">Welcome!</h1>
-        <p class="lead">You are only a few steps away from fully utizing <strong>May Utang Ba Me?</strong>.</p>
-        <hr class="my-4">
-        <p>
-            {% if verification_status == 'VERIFICATION_EMAIL_NOT_YET_SENT' %}
-                We'll be sending out a verification email to your provided address. Be sure to check your spam folder if the email is not found.
-            {% elseif verification_status == 'VERIFICATION_EMAIL_SENT' %}
-                The email validation has been sent. Check your email to verify your account.
-            {% elseif verification_status == 'VERIFICATION_EMAIL_VALIDATED' %}
-                Your account has been successfully verified!
-            {% elseif verification_status == 'VERIFICATION_EMAIL_FAILED' %}
-                Verification failed due to the following issue: {{ error }}
-            {% endif %}
-        </p>
-        <p class="lead">
-            <a href="{{ (proceed_location == '/#') ? 'javascript:void(0)' : proceed_location }}" class="btn btn-dark btn-lg {{ (proceed_location == '/#') ? 'disabled' : '' }}">Proceed</a>
-        </p>
+    <div id="wrapper">
+        <header id="header">
+            <a href="/" class="logo">MayUtangBa.Me?</a>
+        </header>
+        <div id="main">
+            <section class="post">
+                <!-- Form -->
+                <h2>Verify Your Account!</h2>
+                <p>
+                    {% if verification_status == 'VERIFICATION_EMAIL_NOT_YET_SENT' %}
+                        We'll be sending out a verification email to your provided address. Be sure to check your spam folder if the email is not found.
+                    {% elseif verification_status == 'VERIFICATION_EMAIL_SENT' %}
+                        The email validation has been sent. Check your email to verify your account.
+                    {% elseif verification_status == 'VERIFICATION_EMAIL_VALIDATED' %}
+                        Your account has been successfully verified!
+                    {% elseif verification_status == 'VERIFICATION_EMAIL_FAILED' %}
+                        Verification failed due to the following issue: {{ error }}
+                    {% endif %}{% if verification_status == 'VERIFICATION_EMAIL_NOT_YET_SENT' %}
+                        We'll be sending out a verification email to your provided address. Be sure to check your spam folder if the email is not found.
+                    {% elseif verification_status == 'VERIFICATION_EMAIL_SENT' %}
+                        The email validation has been sent. Check your email to verify your account.
+                    {% elseif verification_status == 'VERIFICATION_EMAIL_VALIDATED' %}
+                        Your account has been successfully verified!
+                    {% elseif verification_status == 'VERIFICATION_EMAIL_FAILED' %}
+                        Verification failed due to the following issue: {{ error }}
+                    {% endif %}
+                </p>
+                <a href="{{ (proceed_location == '/#') ? 'javascript:void(0)' : proceed_location }}" class="btn btn-dark btn-lg {{ (proceed_location == '/#') ? 'disabled' : '' }}">Proceed</a>
+                <hr />
+            </section>
+        </div>
+
+        <!-- Copyright -->
+        <div id="copyright">
+            <ul><li>&copy; MayUtangBa.Me?</li></ul>
+        </div>
+
     </div>
-</div>
+{% endblock %}
+
+{% block onloadedscripts %}
+    <script src="{{ asset('build/external/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/browser.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/breakpoints.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/util.js') }}"></script>
+    <script src="{{ asset('build/external/js/main.js') }}"></script>
 {% endblock %}

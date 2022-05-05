@@ -1,21 +1,24 @@
 {{ form_start(userForm) }}
-    <p class="card-text">
-        <div class="form-group">
+    <div class="row gtr-uniform">
+        <div class="col-12 col-12-xsmall">
             {{ form_widget(userForm.email, { 'attr': { 'class': 'form-control', 'placeholder': 'Email' }}) }}
         </div>
-        <div class="form-group">
-            {{ form_widget(userForm.username, { 'attr': { 'class': 'form-control', 'placeholder': 'Username' }}) }}
-        </div>
-        <div class="form-group">
+        <div class="col-6 col-12-xsmall">
             {{ form_widget(userForm.firstname, { 'attr': { 'class': 'form-control', 'placeholder': 'First Name' }}) }}
         </div>
-        <div class="form-group">
+        <div class="col-6 col-12-xsmall">
             {{ form_widget(userForm.lastname, { 'attr': { 'class': 'form-control', 'placeholder': 'Last Name' }}) }}
         </div>
-        <div class="form-group">
+        <div class="col-12 col-12-xsmall">
             {{ form_widget(userForm.nickname, { 'attr': { 'class': 'form-control', 'placeholder': 'Nickname' }}) }}
             <small id="update-profile-help" class="form-text text-danger">{{ form_errors(userForm) }}</small>
         </div>
-    </p>
-    <button type="submit" class="btn float-end btn-dark btn-lg">{{ button_label|default('Update Profile') }}</button>
+        <div class="col-12">
+            <ul class="actions">
+                <li>
+                    <input type="submit" class="primary" value="{{ button_label|default('Update Profile') }}" />
+                </li>
+            </ul>
+        </div>
+    </div>
 {{ form_end(userForm) }}

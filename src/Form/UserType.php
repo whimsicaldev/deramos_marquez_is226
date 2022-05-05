@@ -18,7 +18,6 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, [
                 'attr' => ['readonly' => true] 
                 ])
-            ->add('username', TextType::class)
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
             ->add('nickname', TextType::class);

@@ -63,5 +63,12 @@
     <script src="{{ asset('build/external/js/breakpoints.min.js') }}"></script>
     <script src="{{ asset('build/external/js/util.js') }}"></script>
     <script src="{{ asset('build/external/js/main.js') }}"></script>
-    <script src="{{ asset('build/scripts/security-login.js') }}"></script>
+    <script>
+        $('#submit-signin').on('click', () => {
+            Object.values($('#signin').children('input[type="text"], input[type="password"]'))
+            .forEach(elem => {
+                $(elem).addClass('submitted');
+            });
+        });
+    </script>
 {% endblock %}

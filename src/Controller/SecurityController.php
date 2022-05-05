@@ -42,7 +42,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/signup', name: 'app_signup')]
-    public function signup(User $user = null, UserPasswordHasherInterface $passwordHasher, Request $request, UserRepository $userRepository): Response
+    public function signup(User $user = null, UserPasswordHasherInterface $passwordHasher, Request $request, VerifyEmailHelperInterface $verifyEmailHelper, UserRepository $userRepository, MailerInterface $mailer): Response
     {
         if($user != null) {
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
@@ -60,18 +60,8 @@ class SecurityController extends AbstractController
                     ->get('email')
                     ->addError(new FormError('Email is already in use.'));
             } else {
-                $plaintextPassword = $user->getPassword1();
-
-                // hash the password (based on the security.yaml config for the $user class)
-                $hashedPassword = $passwordHasher->hashPassword(
-                    $user,
-                    $plaintextPassword
-                );
-                $user->setPassword($hashedPassword);
-                $user->setNickname(strtok($user->getEmail(), '@'));
-                $userRepository->add($user);
-                
-                // return $this->redirectToRoute('app_verify', [], Response::HTTP_SEE_OTHER);
+                $this->generateUserAndSendVerificationEmail($passwordHasher, $user, $verifyEmailHelper, $userRepository, $mailer);
+                return $this->redirectToRoute('app_signup_success', [], Response::HTTP_SEE_OTHER);
             }
         }
 
@@ -79,6 +69,38 @@ class SecurityController extends AbstractController
             'user' => $user,
             'form' => $form
         ]);
+    }
+
+    private function generateUserAndSendVerificationEmail(UserPasswordHasherInterface $passwordHasher, User $user, VerifyEmailHelperInterface $verifyEmailHelper, UserRepository $userRepository, MailerInterface $mailer): void
+    {
+        $plaintextPassword = $user->getPassword1();
+        $hashedPassword = $passwordHasher->hashPassword(
+            $user,
+            $plaintextPassword
+        );
+        $user->setPassword($hashedPassword);
+        $user->setNickname(strtok($user->getEmail(), '@'));
+        $userRepository->add($user);
+
+        $signatureComponents = $verifyEmailHelper->generateSignature(
+            'app_verify',
+            $user->getId(),
+            $user->getEmail(),
+            ['id' => $user->getId()]
+        );
+        
+        $email = (new TemplatedEmail())
+            ->from('no-reply@mayutangba.me')
+            ->to($user->getEmail())
+            ->subject('Confirm Your Email and Get Started')
+            ->htmlTemplate('email/verify-email.html.twig')
+            ->context([
+                'verification_url' => $signatureComponents->getSignedUrl()
+            ]);
+
+        $mailer->send($email);
+        $user->setIsEmailVerificationSent(true);
+        $userRepository->add($user);
     }
 
     #[Route('/logout', name: 'app_logout')]
@@ -89,7 +111,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/verify', name: 'app_verify')]
-    public function verify(UserInterface $user = null, Request $request, VerifyEmailHelperInterface $verifyEmailHelper, UserRepository $userRepository, LoggerInterface $logger, ): Response 
+    public function verify(UserInterface $user = null, Request $request, VerifyEmailHelperInterface $verifyEmailHelper, UserRepository $userRepository, LoggerInterface $logger): Response 
     {
         if($user && $user->isVerified()) {
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
@@ -161,5 +183,19 @@ class SecurityController extends AbstractController
         }
 
         return $this->redirectToRoute('app_verify', ['verification_sent' => true], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/reset-password', name: 'app_reset_password')]
+    public function resetPassword()
+    {
+        return $this->render('security/reset-password.html.twig', [
+        ]);
+    }
+
+    #[Route('/signup-success', name: 'app_signup_success')]
+    public function signupSuccess()
+    {
+        return $this->render('security/signup-success.html.twig', [
+        ]);
     }
 }
