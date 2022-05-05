@@ -1,20 +1,122 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StylingAdminUpdateController!{% endblock %}
+{% block title %}Administrator // MayUtangBa.Me?{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/noscript.css') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/fontawesome-all.min.csss') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/main.css') }}" /></noscript>
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div id="wrapper">
+        <header id="header">
+            <a class="logo">MayUtangBa.Me?</a>
+        </header>
+        <nav id="nav">
+            <ul class="links">
+                <li class="active"><a href="#">Expense Categories</a></li>
+                <li><a href="#">[administrator name] Logout</a></li>
+            </ul>
+        </nav>
+        <div id="main">
+            <section class="post">
+                <h2>Expense Categories</h2>
+                <div class="table-wrapper">
+                    <table class="alt">
+                        <thead>
+                            <tr>
+                                <th>Category Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Category 1</td>
+                                <td>
+                                    <select name="demo-category" id="demo-category">
+                                        <option value="">- Action -</option>
+                                        <option value="1">Update</option>
+                                        <option value="1">Delete</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Category 2</td>
+                                <td>
+                                    <select name="demo-category" id="demo-category">
+                                        <option value="">- Action -</option>
+                                        <option value="1">Update</option>
+                                        <option value="1">Delete</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Category 3</td>
+                                <td>
+                                    <select name="demo-category" id="demo-category">
+                                        <option value="">- Action -</option>
+                                        <option value="1">Update</option>
+                                        <option value="1">Delete</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Category 4</td>
+                                <td>
+                                    <select name="demo-category" id="demo-category">
+                                        <option value="">- Action -</option>
+                                        <option value="1">Update</option>
+                                        <option value="1">Delete</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Category 5</td>
+                                <td>
+                                    <select name="demo-category" id="demo-category">
+                                        <option value="">- Action -</option>
+                                        <option value="1">Update</option>
+                                        <option value="1">Delete</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr />
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                <h3>Add new expense category</h3>
+                <form method="post" action="#">
+                    <div class="row gtr-uniform">
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" name="#" id="#" value="" placeholder="Enter category name" />
+                        </div>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Save" class="primary" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+                <hr />
+            </section>
+        </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/jc.marquez/Downloads/jcmarquez/Github/deramos_marquez_is226/src/Controller/StylingAdminUpdateController.php'|file_link(0) }}">src/Controller/StylingAdminUpdateController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/jc.marquez/Downloads/jcmarquez/Github/deramos_marquez_is226/templates/styling_admin_update/index.html.twig'|file_link(0) }}">templates/styling_admin_update/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <div id="copyright">
+            <ul><li>&copy; MayUtangBa.Me?</li></ul>
+        </div>
+    </div>
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/external/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/browser.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/breakpoints.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/util.js') }}"></script>
+    <script src="{{ asset('build/external/js/main.js') }}"></script>
+{% endblock %}
+
 {% endblock %}
