@@ -28,26 +28,26 @@ class UserController extends AbstractController
         $userPasswordForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
+            $userRepository->add($user);
+            $updateMessage = "Profile successfully updated.";
+        } else if ($userPasswordForm->isSubmitted() && $userPasswordForm->isValid()) {
             $existingUser = $userRepository->loadUserByIdentifier($user->getUsername());
 
             if($existingUser != null && $existingUser->getId() != $user->getId()) {
                 $userForm->addError(new FormError('Username is already in use.'));
             } else {
+                $plaintextPassword = $user->getPassword1();
+
+                // hash the password (based on the security.yaml config for the $user class)
+                $hashedPassword = $passwordHasher->hashPassword(
+                    $user,
+                    $plaintextPassword
+                );
+                $user->setPassword($hashedPassword);
+
                 $userRepository->add($user);
-                $updateMessage = "Profile successfully updated.";
+                $updateMessage = "Password successfully changed.";
             }
-        } else if ($userPasswordForm->isSubmitted() && $userPasswordForm->isValid()) {
-            $plaintextPassword = $user->getPassword1();
-
-            // hash the password (based on the security.yaml config for the $user class)
-            $hashedPassword = $passwordHasher->hashPassword(
-                $user,
-                $plaintextPassword
-            );
-            $user->setPassword($hashedPassword);
-
-            $userRepository->add($user);
-            $updateMessage = "Password successfully changed.";
         }
 
         return $this->renderForm('user/edit.html.twig', [

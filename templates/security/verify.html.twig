@@ -27,14 +27,6 @@
                         Your account has been successfully verified!
                     {% elseif verification_status == 'VERIFICATION_EMAIL_FAILED' %}
                         Verification failed due to the following issue: {{ error }}
-                    {% endif %}{% if verification_status == 'VERIFICATION_EMAIL_NOT_YET_SENT' %}
-                        We'll be sending out a verification email to your provided address. Be sure to check your spam folder if the email is not found.
-                    {% elseif verification_status == 'VERIFICATION_EMAIL_SENT' %}
-                        The email validation has been sent. Check your email to verify your account.
-                    {% elseif verification_status == 'VERIFICATION_EMAIL_VALIDATED' %}
-                        Your account has been successfully verified!
-                    {% elseif verification_status == 'VERIFICATION_EMAIL_FAILED' %}
-                        Verification failed due to the following issue: {{ error }}
                     {% endif %}
                 </p>
                 <a href="{{ (proceed_location == '/#') ? 'javascript:void(0)' : proceed_location }}" class="btn btn-dark btn-lg {{ (proceed_location == '/#') ? 'disabled' : '' }}">Proceed</a>
