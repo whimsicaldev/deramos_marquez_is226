@@ -21,7 +21,15 @@
     </head>
     <body class="is-preload">
         <div class="bg" style="background-image: url({{ asset('build/images/background.png') }})">
-            {% block body %}{% endblock %}
+            <div id="wrapper">
+                <header id="header">
+                    <a class="logo">MayUtangBa.Me?</a>
+                </header>
+                {% block body %}{% endblock %}
+                <div id="copyright">
+                    <ul><li>&copy; MayUtangBa.Me?</li></ul>
+                </div>
+            </div>
         </div>
 
         {% block modal %}{% endblock %}

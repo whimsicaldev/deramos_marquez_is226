@@ -10,49 +10,33 @@
 {% endblock %}
 
 {% block body %}
-    <div id="wrapper">
-        <header id="header">
-            <a class="logo">MayUtangBa.Me?</a>
-        </header>
-        <nav id="nav">
-            <ul class="links">
-                <li><a href="/">Expenses</a></li>
-                <li><a href="#">Contact</a></li>
-                <li class="active"><a href="#">Account</a></li>
-                <li><a href="/logout">[{{ app.user.nickname }}] Logout</a></li>
-            </ul>
-        </nav>
-        <div id="main">
-            <section class="post">
-                <h2>Personal Information</h2>
-                {{ include('user/_form-update-profile.html.twig') }}
-                <hr />
+    {% include "user-nav.html.twig" %}
+    <div id="main">
+        <section class="post">
+            <h2>Personal Information</h2>
+            {{ include('user/_form-update-profile.html.twig') }}
+            <hr />
 
-                <h2>Password and Security</h2>
-                {{ include('user/_form-change-password.html.twig') }}
-                <hr />
+            <h2>Password and Security</h2>
+            {{ include('user/_form-change-password.html.twig') }}
+            <hr />
 
-                <h2>Deactivation</h2>
-                <form method="post" action="#">
-                    <div class="row gtr-uniform">
-                        <div class="col-12 col-12-xsmall">
-                            <input type="text" name="username" id="username" value="" placeholder="Type DEACTIVATE to proceed" />
-                        </div>
-                        
-                        <div class="col-12">
-                            <ul class="actions">
-                                <li><input type="submit" value="Deactivate" class="button" /></li>
-                            </ul>
-                        </div>  
+            <h2>Deactivation</h2>
+            <form method="post" action="#">
+                <div class="row gtr-uniform">
+                    <div class="col-12 col-12-xsmall">
+                        <input type="text" name="username" id="username" value="" placeholder="Type DEACTIVATE to proceed" />
                     </div>
-                </form>
-                <hr />
-            </section>
-        </div>
-
-        <div id="copyright">
-            <ul><li>&copy; MayUtangBa.Me?</li></ul>
-        </div>
+                    
+                    <div class="col-12">
+                        <ul class="actions">
+                            <li><input type="submit" value="Deactivate" class="button" /></li>
+                        </ul>
+                    </div>  
+                </div>
+            </form>
+            <hr />
+        </section>
     </div>
 {% endblock %}
 

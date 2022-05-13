@@ -10,48 +10,36 @@
 {% endblock %}
 
 {% block body %}
-    <div id="wrapper">
-        <header id="header">
-            <a href="/" class="logo">MayUtangBa.Me?</a>
-        </header>
-
-        <nav id="nav">
-            <ul class="links">
-                <li><a href="/signup">Sign Up</a></li>
-                <li class="active"><a href="#">Login</a></li>
-            </ul>
-        </nav>
-        <div id="main">
-            <section class="post">
-                <!-- Form -->
-                <h2>Log into your account</h2>
-                <form action="{{ path('app_login') }}" method="post" id="signin">
-                    <div class="row gtr-uniform">
-                        <div class="col-6 col-12-xsmall">
-                            <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username or email" required/>
-                        </div>
-                        <div class="col-6 col-12-xsmall">
-                            <input type="password" id="password" name="_password" placeholder="Password"  required/>
-                        </div>
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                        <div class="col-12">
-                            <ul class="actions">
-                                <li><input type="submit" value="Log In" class="primary" /></li>
-                                <li><input type="button" onclick="location.href='{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}';" class="google" value="Continue with Google" /></li>
-                            </ul>
-                            <p><a href="#">Forgot password?</a></p>
-                        </div>
+    <nav id="nav">
+        <ul class="links">
+            <li><a href="/signup">Sign Up</a></li>
+            <li class="active"><a href="#">Login</a></li>
+        </ul>
+    </nav>
+    <div id="main">
+        <section class="post">
+            <!-- Form -->
+            <h2>Log into your account</h2>
+            <form action="{{ path('app_login') }}" method="post" id="signin">
+                <div class="row gtr-uniform">
+                    <div class="col-6 col-12-xsmall">
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username or email" required/>
                     </div>
-                </form>
-                <hr />
-            </section>
-        </div>
-
-        <!-- Copyright -->
-        <div id="copyright">
-            <ul><li>&copy; MayUtangBa.Me?</li></ul>
-        </div>
-
+                    <div class="col-6 col-12-xsmall">
+                        <input type="password" id="password" name="_password" placeholder="Password"  required/>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <div class="col-12">
+                        <ul class="actions">
+                            <li><input type="submit" value="Log In" class="primary" /></li>
+                            <li><input type="button" onclick="location.href='{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}';" class="google" value="Continue with Google" /></li>
+                        </ul>
+                        <p><a href="/forgot-password">Forgot password?</a></p>
+                    </div>
+                </div>
+            </form>
+            <hr />
+        </section>
     </div>
 {% endblock %}
 

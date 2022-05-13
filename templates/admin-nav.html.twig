@@ -1,0 +1,7 @@
+<nav id="nav">
+    <ul class="links">
+        <li class="{{ path(app.request.attributes.get('_route')) == '/'? 'active': null}}"><a href="/">Dashboard</a></li>
+        <li class="{{ '/category/' in path(app.request.attributes.get('_route'))? 'active': null}}"><a href="/category">Expense Categories</a></li>
+        <li><a href="/logout">[{{ app.user.nickname }}] Logout</a></li>
+    </ul>
+</nav>

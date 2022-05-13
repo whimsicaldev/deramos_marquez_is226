@@ -10,30 +10,20 @@
 {% endblock %}
 
 {% block body %}
-    <div id="wrapper">
-        <header id="header">
-            <a href="/" class="logo">MayUtangBa.Me?</a>
-        </header>
+    <nav id="nav">
+        <ul class="links">
+            <li class="active"><a href="#">Sign Up</a></li>
+            <li><a href="/login">Login</a></li>
+        </ul>
+    </nav>
 
-        <nav id="nav">
-            <ul class="links">
-                <li class="active"><a href="#">Sign Up</a></li>
-                <li><a href="/login">Login</a></li>
-            </ul>
-        </nav>
-
-        <div id="main">
-            <section class="post">
-                <h2>Create your account</h2>
-                {{ include('security/_form-signup.html.twig') }}
-                <hr />
-            </section>
-        </div>
-
-        <div id="copyright">
-            <ul><li>&copy; MayUtangBa.Me?</li></ul>
-        </div>
-            </div>
+    <div id="main">
+        <section class="post">
+            <h2>Create your account</h2>
+            {{ include('security/_form-signup.html.twig') }}
+            <hr />
+        </section>
+    </div>
 {% endblock %}
 
 {% block onloadedscripts %}

@@ -38,12 +38,12 @@
   "build/external/js/jquery.scrollex.min.js": "/build/external/js/jquery.scrollex.min.js",
   "build/external/js/browser.min.js": "/build/external/js/browser.min.js",
   "build/images/background.png": "/build/images/background.png",
+  "build/scripts/security-login.js": "/build/scripts/security-login.d4ced517.js",
   "build/styles/user-edit.css": "/build/styles/user-edit.78306ef9.css",
   "build/styles/email-template-verify-email.css": "/build/styles/email-template-verify-email.b004be2f.css",
   "build/external/css/noscript.css": "/build/external/css/noscript.css",
   "build/external/js/jquery.scrolly.min.js": "/build/external/js/jquery.scrolly.min.js",
   "build/styles/header.css": "/build/styles/header.84b87002.css",
   "build/styles/base.css": "/build/styles/base.ac8d9518.css",
-  "build/styles/security-verify.css": "/build/styles/security-verify.e11f12d9.css",
-  "build/scripts/security-login.js": "/build/scripts/security-login.31d6cfe0.js"
+  "build/styles/security-verify.css": "/build/styles/security-verify.e11f12d9.css"
 }

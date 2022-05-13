@@ -22,10 +22,10 @@ class Category
     #[ORM\Column(type: 'enumcategory')]
     private $type;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $icon;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $iconColor;
 
     public function getId(): ?int

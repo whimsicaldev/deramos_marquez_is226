@@ -56,7 +56,8 @@ security:
         - { path: ^/verify, role: PUBLIC_ACCESS }
         - { path: ^/connect/google, role: PUBLIC_ACCESS }
         - { path: ^/register, role: PUBLIC_ACCESS }
-        - { path: ^/, role: ROLE_USER }
+        - { path: ^/, role: [ROLE_ADMIN, ROLE_USER] }
+        - { path: ^/category, role: ROLE_ADMIN }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 

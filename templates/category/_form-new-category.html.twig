@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+    <div class="row gtr-uniform">
+        <div class="col-6 col-12-xsmall">
+             {{ form_widget(form.name, { 'attr': { 'placeholder': 'Enter category name' }}) }}
+        </div>
+        <div class="col-12">
+            <ul class="actions">
+                <li><input type="submit" value="Save" class="primary"/></li>
+            </ul>
+        </div>
+    </div>
+{{ form_end(form) }}

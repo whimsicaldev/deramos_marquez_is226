@@ -10,28 +10,16 @@
 {% endblock %}
 
 {% block body %}
-    <div id="wrapper">
-        <header id="header">
-            <a class="logo">MayUtangBa.Me?</a>
-        </header>
-        <nav id="nav">
-            <ul class="links">
-                <li class="active"><a href="#">Expenses</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="/user/{{ app.user.id }}/edit">Account</a></li>
-                <li><a href="/logout">[{{ app.user.nickname }}] Logout</a></li>
-            </ul>
-        </nav>
-        <div id="main">
-            <section class="post">
-                <h2>Welcome!</h2>
-                <hr />
-            </section>
-        </div>
-
-        <div id="copyright">
-            <ul><li>&copy; MayUtangBa.Me?</li></ul>
-        </div>
+    {% if is_granted('ROLE_ADMIN') %}
+       {% include "admin-nav.html.twig" %}
+    {% else %}
+        {% include "user-nav.html.twig" %}
+   {% endif %}
+    <div id="main">
+        <section class="post">
+            <h2>Welcome!</h2>
+            <hr />
+        </section>
     </div>
 {% endblock %}
 

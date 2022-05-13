@@ -1,42 +1,108 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ app.user.nickname }} | Expense Category {% endblock %}
+{% block title %}Administrator // MayUtangBa.Me?{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/noscript.css') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/fontawesome-all.min.csss') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/main.css') }}" /></noscript>
+{% endblock %}
 
 {% block body %}
-{% include "header.html.twig" %}
-    <h1>Expense Categories</h1>
+    {% include "admin-nav.html.twig" %}
+    <div id="main">
+        <section class="post">
+            <h2>Expense Categories</h2>
+            <div class="table-wrapper">
+                <table class="alt">
+                    <thead>
+                        <tr>
+                            <th>Category Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in categories %}
+                            <tr>
+                                <td>{{ category.name }}</td>
+                                <td>
+                                    <select>
+                                        <option value="">- Action -</option>
+                                        <option value="1">Update</option>
+                                        <option value="1">Delete</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">no records found</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <hr />
 
-    <table class="table table-striped">
-        <thead>
+            <h3>Add new expense category</h3>
+            {{ include('category/_form-new-category.html.twig') }}
+            <hr />
+        </section>
+    </div>
+{% endblock %}
 
+
+{% block onloadedscripts %}
+    <script src="{{ asset('build/external/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/browser.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/breakpoints.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/util.js') }}"></script>
+    <script src="{{ asset('build/external/js/main.js') }}"></script>
+{% endblock %}
+
+{#}
+{% extends 'base.html.twig' %}
+
+{% block title %}Category{% endblock %}
+
+{% block body %}
+    <h1>Category</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ category.id }}</td>
+            </tr>
             <tr>
                 <th>Name</th>
-                <th>Description</th>
-                <th>Icon</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
                 <td>{{ category.name }}</td>
-                <td>{{ category.description }}</td>
-                <td class="alert alert-primary">
-                    <button type="button" class="btn btn-outline-primary">
-                        <span class="bi {{ category.icon}}"></span>
-                    </button>
-                </td>
-                <td>
-                    <a href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
-                </td>
             </tr>
-        {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <th>Description</th>
+                <td>{{ category.description }}</td>
             </tr>
-        {% endfor %}
+            <tr>
+                <th>Type</th>
+                <td>{{ category.type }}</td>
+            </tr>
+            <tr>
+                <th>Icon</th>
+                <td>{{ category.icon }}</td>
+            </tr>
+            <tr>
+                <th>IconColor</th>
+                <td>{{ category.iconColor }}</td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_category_new') }}">Create new</a>
+    <a href="{{ path('app_category_index') }}">back to list</a>
+
+    <a href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
+
+    {{ include('category/_delete_form.html.twig') }}
 {% endblock %}
+
+{#}
