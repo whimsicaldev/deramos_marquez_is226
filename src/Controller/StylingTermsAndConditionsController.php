@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StylingTermsAndConditionsController extends AbstractController
 {
-    #[Route('/styling/terms/and/conditions', name: 'app_styling_terms_and_conditions')]
+    #[Route('/termsandconditionsstyle', name: 'app_styling_terms_and_conditions')]
     public function index(): Response
     {
         return $this->render('styling_terms_and_conditions/index.html.twig', [
