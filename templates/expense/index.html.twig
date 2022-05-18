@@ -1,43 +1,156 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Expense index{% endblock %}
+{% block title %}Expenses // MayUtangBa.Me?{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/noscript.css') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/fontawesome-all.min.csss') }}" /></noscript>
+    <noscript><link rel="stylesheet" href="{{ asset('build/external/css/main.css') }}" /></noscript>
+{% endblock %}
 
 {% block body %}
-    <h1>Expense index</h1>
+    <div id="wrapper">
+        <header id="header">
+            <a class="logo">MayUtangBa.Me?</a>
+        </header>
+        <nav id="nav">
+            <ul class="links">
+                <li class="active"><a href="#">Expenses</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Account</a></li>
+                <li><a href="#">[first name] Logout</a></li>
+            </ul>
+            <ul class="icons">
+                <li><a href="#" class="icon fa-solid fa-bell"><span class="label">Notifications</span></a></li>
+            </ul>
+        </nav>
+        <div id="main">
+            <section class="post">
+                <h3>Add new expense</h3>
+                <form method="post" action="#">
+                    <div class="row gtr-uniform">
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" name="#" id="#" value="" placeholder="Item name" />
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" name="#" id="#" value="" placeholder="Amount" />
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <select name="" id="">
+                                <option value="">- Category -</option>
+                                <option value="1">Category1</option>
+                                <option value="2">Category2</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="datetime-local" name="#" id="#" value="" />
+                        </div>
+                        <div class="col-12">
+                            <textarea name="" id="" placeholder="Notes" rows="3"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Save" class="primary" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+                <hr />
+                
+                <h2>Expenses</h2>
+                <div class="table-wrapper">
+                    <table class="alt">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Item name</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>May 16</td>
+                                <td>Nutribun</td>
+                                <td>₱100.00</td>
+                                <td>
+                                    <select name="demo-category" id="demo-category">
+                                        <option value="">- Action -</option>
+                                        <option value="1">Update</option>
+                                        <option value="2">Delete</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>May 15</td>
+                                <td>Rice</td>
+                                <td>₱20.00</td>
+                                <td>
+                                    <select name="demo-category" id="demo-category">
+                                        <option value="">- Action -</option>
+                                        <option value="1">Update</option>
+                                        <option value="2">Delete</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>May 15</td>
+                                <td>Coke</td>
+                                <td>₱85.00</td>
+                                <td>
+                                    <select name="demo-category" id="demo-category">
+                                        <option value="">- Action -</option>
+                                        <option value="1">Update</option>
+                                        <option value="2">Delete</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>May 12</td>
+                                <td>Airplane Ticket</td>
+                                <td>₱50,000.00</td>
+                                <td>
+                                    <select name="demo-category" id="demo-category">
+                                        <option value="">- Action -</option>
+                                        <option value="1">Update</option>
+                                        <option value="2">Delete</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>May 5</td>
+                                <td>Spotify</td>
+                                <td>₱35.00</td>
+                                <td>
+                                    <select name="demo-category" id="demo-category">
+                                        <option value="">- Action -</option>
+                                        <option value="1">Update</option>
+                                        <option value="2">Delete</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr />
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>TotalAmount</th>
-                <th>Date</th>
-                <th>IsPersonal</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for expense in expenses %}
-            <tr>
-                <td>{{ expense.id }}</td>
-                <td>{{ expense.name }}</td>
-                <td>{{ expense.description }}</td>
-                <td>{{ expense.totalAmount }}</td>
-                <td>{{ expense.date ? expense.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ expense.isPersonal ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_expense_show', {'id': expense.id}) }}">show</a>
-                    <a href="{{ path('app_expense_edit', {'id': expense.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </section>
+        </div>
 
-    <a href="{{ path('app_expense_new') }}">Create new</a>
+        <div id="copyright">
+            <ul><li>&copy; MayUtangBa.Me?</li></ul>
+        </div>
+    </div>
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/external/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/browser.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/breakpoints.min.js') }}"></script>
+    <script src="{{ asset('build/external/js/util.js') }}"></script>
+    <script src="{{ asset('build/external/js/main.js') }}"></script>
+{% endblock %}
+
 {% endblock %}

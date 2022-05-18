@@ -2,7 +2,7 @@
     <ul class="links">
         <li class="{{ app.request.attributes.get('_route') == 'app_home'? 'active': ''}}"><a href="/">Dashboard</a></li>
         <li class="{{ 'app_expense' in app.request.attributes.get('_route')? 'active': null}}"><a href="/expense">Expenses</a></li>
-        <li class="{{ 'app_contact' in app.request.attributes.get('_route')? 'active': null}}"><a href="/contact">Contact</a></li>
+        <li class="{{ 'app_connection' in app.request.attributes.get('_route')? 'active': null}}"><a href="/connection">Contact</a></li>
         <li class="{{ 'app_user' in app.request.attributes.get('_route')? 'active': null}}"><a href="/user/{{ app.user.id }}/edit">Account</a></li>
         <li><a href="/logout">[{{ app.user.nickname }}] Logout</a></li>
     </ul>

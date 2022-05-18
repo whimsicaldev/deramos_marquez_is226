@@ -26,7 +26,7 @@ class SecurityController extends AbstractController
     const VERIFICATION_EMAIL_FAILED = 'VERIFICATION_EMAIL_FAILED';
 
     #[Route('/login', name: 'app_login')]
-    public function login(User $user = null, AuthenticationUtils $authenticationUtils): Response
+    public function login(UserInterface $user = null, AuthenticationUtils $authenticationUtils): Response
     {
         if($user != null) {
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
@@ -42,7 +42,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/signup', name: 'app_signup')]
-    public function signup(User $user = null, UserPasswordHasherInterface $passwordHasher, Request $request, VerifyEmailHelperInterface $verifyEmailHelper, UserRepository $userRepository, MailerInterface $mailer): Response
+    public function signup(UserInterface $user = null, UserPasswordHasherInterface $passwordHasher, Request $request, VerifyEmailHelperInterface $verifyEmailHelper, UserRepository $userRepository, MailerInterface $mailer): Response
     {
         if($user != null) {
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);

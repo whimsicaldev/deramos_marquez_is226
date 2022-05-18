@@ -13,19 +13,21 @@ class Connection
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "email")]
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "email")]
     #[ORM\JoinColumn(nullable: false)]
     private $peer;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
-    private $amount;
+    private $amount = 0;
 
     #[ORM\Column(type: 'enumconnection')]
     private $status;
+
+    private $peerEmail;
 
     public function getId(): ?int
     {
@@ -68,7 +70,7 @@ class Connection
         return $this;
     }
 
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -76,6 +78,18 @@ class Connection
     public function setStatus($status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getPeerEmail(): ?string
+    {
+        return $this->peerEmail;
+    }
+
+    public function setPeerEmail($peerEmail): self
+    {
+        $this->peerEmail = $peerEmail;
 
         return $this;
     }

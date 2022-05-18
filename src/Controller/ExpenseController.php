@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Expense;
+use App\Entity\Connection;
 use App\Form\ExpenseType;
 use App\Repository\ExpenseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,10 +41,10 @@ class ExpenseController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_expense_show', methods: ['GET'])]
-    public function show(Expense $expense): Response
+    public function show(Connection $connection): Response
     {
-        return $this->render('expense/show.html.twig', [
-            'expense' => $expense,
+        return $this->render('expense/index.html.twig', [
+            // 'expense' => $expense,
         ]);
     }
 
