@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ExpenseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ExpenseRepository::class)]
@@ -33,8 +35,16 @@ class Expense
     #[ORM\JoinColumn(nullable: false)]
     private $createdBy;
 
+    #[ORM\OneToMany(mappedBy: 'expense', targetEntity: Loan::class, orphanRemoval: true)]
+    private $loans;
+
     private $paidBy;
     private $percentShouldered;
+
+    public function __construct()
+    {
+        $this->loans = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -150,6 +160,35 @@ class Expense
     {
         $this->percentShouldered = $percentShouldered;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Loan>
+     */
+    public function getLoans(): Collection
+    {
+        return $this->loans;
+    }
+
+    public function addLoan(Loan $loan): self
+    {
+        if (!$this->loans->contains($loan)) {
+            $this->loans[] = $loan;
+            $settleHistory->setExpense($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLoan(Loan $loan): self
+    {
+        if ($this->loans->removeElement($loan)) {
+            // set the owning side to null (unless already changed)
+            if ($loan->getExpense() === $this) {
+                $loan->setExpense(null);
+            }
+        }
         return $this;
     }
 }

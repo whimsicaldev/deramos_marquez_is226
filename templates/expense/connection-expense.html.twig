@@ -13,9 +13,21 @@
     {% include "user-nav.html.twig" %}
     <div id="main">
         <section class="post">
-            <h1>Personal Expenses</h1>
+            <h1>[{{ peer.nickname }}]</h1>
+            <h2>{% if connection.userDebt > 0 %}
+                    {{ connection.user.id == app.user.id? 'You owe ': 'You are owed '}} {{ connection.userDebt }}
+                {% elseif connection.peerDebt > 0 %}
+                    {{ connection.peer.id == app.user.id? 'You owe ': 'You are owed '}} {{ connection.peerDebt }}
+                {% else %}
+                    All settled.
+                {% endif %}</h2>
+            {% if connection.userDebt > 0 or connection.peerDebt > 0%}
+                <ul class="action">
+                    <input type="button" value="Settle" class="primary btn-small" />
+                </ul>
+            {% endif %}
             <h3>Add Expense</h3>
-            {{ include('expense/_form-add-personal-expense.html.twig') }}
+            {{ include('expense/_form-add-expense.html.twig') }}
             <hr />
             
             <h2>Expenses</h2>
@@ -25,7 +37,7 @@
                         <tr>
                             <th>Date</th>
                             <th>Item name</th>
-                            <th>Amount Spent</th>
+                            <th>Amount</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,7 +45,13 @@
                             <tr>
                                 <td>{{ loan.expense.dateDisplay }}</td>
                                 <td>{{ loan.expense.name }}</td>
-                                <td>{{ loan.amount }}</td>
+                                <td>{{ loan.expense.totalAmount }}
+                                    [{% if loan.lender.id == app.user.id %}
+                                        You are owed
+                                    {% else %}
+                                        You owe
+                                    {% endif %}&nbsp;{{ loan.amount }}]
+                                </td>
                                 <td>
                                     <select onchange="location = this.value;">
                                         <option value="">- Action -</option>

@@ -73,4 +73,15 @@ class LoanRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findByBorrower($borrower): ?array
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.borrower = :borrower')
+            ->andWhere('l.amount > 0')
+            ->orderBy('l.date', 'DESC')
+            ->setParameter('borrower', $borrower)
+            ->getQuery()
+            ->getResult();
+    }
 }

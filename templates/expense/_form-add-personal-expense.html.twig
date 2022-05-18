@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+    <div class="row gtr-uniform">
+        <div class="col-6 col-12-xsmall">
+            {{ form_widget(form.category, { 'attr': { 'placeholder': 'Category' }}) }}
+        </div>
+        <div class="col-6 col-12-xsmall">
+            {{ form_widget(form.name, { 'attr': { 'placeholder': 'Expense Description' }}) }}
+        </div>
+        <div class="col-6 col-12-xsmall">
+            {{ form_widget(form.totalAmount, { 'attr': { 'placeholder': 'Amount Paid', 'min': 0, 'step': '0.01' }}) }}
+        </div>
+        <div class="col-1 col-12-xsmall">
+            <span>When:</span>
+        </div>
+        <div class="col-5 col-12-xsmall">
+            {{ form_widget(form.date, { 'attr': { 'placeholder': 'Date Paid' }}) }}
+        </div>
+        <div class="col-12">
+            {{ form_widget(form.description, { 'attr': { 'placeholder': 'Notes' }}) }}
+        </div>
+        <div class="col-12">
+            <ul class="actions">
+                <li><input type="submit" value="Add" class="primary" /></li>
+            </ul>
+        </div>
+    </div>
+{{ form_end(form) }}

@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use App\Entity\Expense;
 use App\Entity\Connection;
 use App\Entity\Loan;
 use App\Form\ExpenseType;
+use App\Form\PersonalExpenseType;
 use App\Repository\ExpenseRepository;
 use App\Repository\LoanRepository;
 use App\Repository\ConnectionRepository;
@@ -18,27 +20,32 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[Route('/expense')]
 class ExpenseController extends AbstractController
 {
-    #[Route('/', name: 'app_expense_index', methods: ['GET'])]
-    public function index(ExpenseRepository $expenseRepository): Response
-    {
-        return $this->render('expense/index.html.twig', [
-            'expenses' => $expenseRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_expense_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ExpenseRepository $expenseRepository): Response
+    #[Route('/', name: 'app_expense_index', methods: ['GET', 'POST'])]
+    public function index(Request $request, UserInterface $user, LoanRepository $loanRepository, ExpenseRepository $expenseRepository): Response
     {
         $expense = new Expense();
-        $form = $this->createForm(ExpenseType::class, $expense);
+        $form = $this->createForm(PersonalExpenseType::class, $expense);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // create the expense
+            $expense->setCreatedBy($user);
             $expenseRepository->add($expense);
+
+            $loan = new Loan();
+            $loan->setLender($user);
+            $loan->setBorrower($user);
+            $loan->setAmount($expense->getTotalAmount());
+            $loan->setDate($expense->getDate());
+            $loan->setCategory($expense->getCategory());
+            $loan->setExpense($expense);
+            $loanRepository->add($loan);
+
             return $this->redirectToRoute('app_expense_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('expense/new.html.twig', [
+        return $this->renderForm('expense/index.html.twig', [
+            'loans' => $loanRepository->findByBorrower($user),
             'expense' => $expense,
             'form' => $form,
         ]);
@@ -139,7 +146,7 @@ class ExpenseController extends AbstractController
             return $this->redirectToRoute('app_expense_show', ['id' => $connection->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('expense/index.html.twig', [
+        return $this->renderForm('expense/connection-expense.html.twig', [
             'expense' => $expense,
             'form' => $form,
             'connection' => $connection,
@@ -149,9 +156,22 @@ class ExpenseController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_expense_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Expense $expense, ExpenseRepository $expenseRepository): Response
+    public function edit(UserInterface $user, Request $request, Expense $expense, ExpenseRepository $expenseRepository): Response
     {
-        $form = $this->createForm(ExpenseType::class, $expense);
+        $users = new ArrayCollection();
+
+        foreach($expense->getLoans() as $loan) {
+            if($loan->getBorrower()->equals($user)) {
+                $loan->getBorrower()->setDisplayName('You');
+            } else {
+                $loan->getBorrower()->setDisplayName($loan->getBorrower()->getNickname());
+            }
+            $users[] = $loan->getBorrower();
+        }
+
+        $form = $this->createForm(ExpenseType::class, $expense, array(
+            'paidBy' => $users
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -165,13 +185,49 @@ class ExpenseController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_expense_delete', methods: ['POST'])]
-    public function delete(Request $request, Expense $expense, ExpenseRepository $expenseRepository): Response
+    #[Route('/{id}/delete', name: 'app_expense_delete', methods: ['GET'])]
+    public function delete(UserInterface $user, Request $request, Expense $expense, ExpenseRepository $expenseRepository, ConnectionRepository $connectionRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$expense->getId(), $request->request->get('_token'))) {
-            $expenseRepository->remove($expense);
-        }
+        $this->deleteLoans($expense, $connectionRepository);
+        $expense->setCreatedBy(null);
+        $expense->setCategory(null);
+        $expenseRepository->remove($expense);
 
         return $this->redirectToRoute('app_expense_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    private function deleteLoans(Expense $expense, ConnectionRepository $connectionRepository)
+    {
+        foreach($expense->getLoans() as $loan) {
+            if(!$loan->getLender()->equals($loan->getBorrower())) {
+                $connection = $connectionRepository->findByUserAndPeer($loan->getLender(), $loan->getBorrower());
+                if($connection != null && ($connection->getLastSettleDate() == null || $connection->getLastSettleDate() > $loan->getDate())) {
+                    if($loan->getLender()->equals($user)) {
+                        $balance = $connection->getPeerDebt() - $loan->getAmount();
+    
+                        if($balance > 0) {
+                            $connection->setPeerDebt($balance);
+                        } else {
+                            $balance = $balance * -1;
+                            $connection->setPeerDebt(0);
+                            $connection->setUserDebt($balance);
+                        }
+                        
+                    } else {
+                        $balance = $connection->getUserDebt() - $loan->getAmount();
+    
+                        if($balance > 0) {
+                            $connection->setUserDebt($balance);
+                        } else {
+                            $balance = $balance * -1;
+                            $connection->setUserDebt(0);
+                            $connection->setPeerDebt($balance);
+                        }
+                    }
+
+                    $connectionRepository->add($connection);
+                }
+            }
+        }
     }
 }

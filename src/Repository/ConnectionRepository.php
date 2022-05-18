@@ -72,4 +72,16 @@ class ConnectionRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findByUserAndPeer($user, $peer): ?Connection
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.user = :user and c.peer = :peer')
+            ->orWhere('c.user = :peer and c.peer = :user')
+            ->setParameter('user', $user)
+            ->setParameter('peer', $peer)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

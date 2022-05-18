@@ -40,6 +40,9 @@ class Connection
     #[ORM\OneToMany(mappedBy: 'connection', targetEntity: SettleHistory::class, orphanRemoval: true)]
     private $settleHistoryList;
 
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $lastSettleDate;
+
     public function __construct()
     {
         $this->settleHistoryList = new ArrayCollection();
@@ -160,6 +163,18 @@ class Connection
                 $settleHistory->setConnection(null);
             }
         }
+        return $this;
+    }
+
+    public function getLastSettleDate(): ?\DateTimeInterface
+    {
+        return $this->lastSettleDate;
+    }
+
+    public function setLastSettleDate(?\DateTimeInterface $lastSettleDate): self
+    {
+        $this->lastSettleDate = $lastSettleDate;
+
         return $this;
     }
 }
