@@ -37,7 +37,8 @@ class ConnectionController extends AbstractController
         return $this->renderForm('connection/index.html.twig', [
             'connection' => $connection,
             'form' => $form,
-            'connections' => $connectionRepository->findAll(),
+            'connections' => $connectionRepository->findByUser($user),
+
         ]);
     }
 

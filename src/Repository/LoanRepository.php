@@ -62,15 +62,15 @@ class LoanRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Loan
+    public function findByBorrowerAndLender($user, $peer): ?array
     {
         return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('l.lender = :user and l.borrower = :peer')
+            ->orWhere('l.borrower = :user and l.lender = :peer')
+            ->orderBy('l.date', 'DESC')
+            ->setParameter('user', $user)
+            ->setParameter('peer', $peer)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
 }

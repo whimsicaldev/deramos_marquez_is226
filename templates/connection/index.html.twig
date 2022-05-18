@@ -23,14 +23,21 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Email</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for connection in connections %}
                             <tr>
                                 <td>{{ connection.peer.nickname }}</td>
-                                <td>{{ connection.peer.email }}</td>
+                                <td>
+                                    {% if connection.userDebt > 0 %}
+                                        {{ connection.user.id == app.user.id? 'You owe ': 'You are owed '}} {{ connection.userDebt }}
+                                    {% elseif connection.peerDebt > 0 %}
+                                        {{ connection.peer.id == app.user.id? 'You owe ': 'You are owed '}} {{ connection.peerDebt }}
+                                    {% else %}
+                                        All settled.
+                                    {% endif %}
+                                </td>
                                 <td><a href="/expense/{{ connection.id }}">View Expenses</a></td>
                             </tr>
                         {% else %}

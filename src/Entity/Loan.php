@@ -28,7 +28,6 @@ class Loan
     private $date;
 
     #[ORM\ManyToOne(targetEntity: Payment::class)]
-    #[ORM\JoinColumn(nullable: false)]
     private $payment;
 
     #[ORM\ManyToOne(targetEntity: Expense::class)]

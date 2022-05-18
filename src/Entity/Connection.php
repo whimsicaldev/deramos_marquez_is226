@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ConnectionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ConnectionRepository::class)]
@@ -28,6 +30,20 @@ class Connection
     private $status;
 
     private $peerEmail;
+
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    private $userDebt = 0;
+
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    private $peerDebt = 0;
+
+    #[ORM\OneToMany(mappedBy: 'connection', targetEntity: SettleHistory::class, orphanRemoval: true)]
+    private $settleHistoryList;
+
+    public function __construct()
+    {
+        $this->settleHistoryList = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,6 +107,59 @@ class Connection
     {
         $this->peerEmail = $peerEmail;
 
+        return $this;
+    }
+
+    public function getUserDebt(): ?string
+    {
+        return $this->userDebt;
+    }
+
+    public function setUserDebt(string $userDebt): self
+    {
+        $this->userDebt = $userDebt;
+
+        return $this;
+    }
+
+    public function getPeerDebt(): ?string
+    {
+        return $this->peerDebt;
+    }
+
+    public function setPeerDebt(string $peerDebt): self
+    {
+        $this->peerDebt = $peerDebt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SettleHistory>
+     */
+    public function getSettleHistoryList(): Collection
+    {
+        return $this->settleHistoryList;
+    }
+
+    public function addSettleHistory(SettleHistory $settleHistory): self
+    {
+        if (!$this->settleHistoryList->contains($settleHistory)) {
+            $this->settleHistoryList[] = $settleHistory;
+            $settleHistory->setConnection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSettleHistory(SettleHistory $settleHistory): self
+    {
+        if ($this->settleHistoryList->removeElement($settleHistory)) {
+            // set the owning side to null (unless already changed)
+            if ($settleHistory->getConnection() === $this) {
+                $settleHistory->setConnection(null);
+            }
+        }
         return $this;
     }
 }

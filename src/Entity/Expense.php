@@ -29,18 +29,12 @@ class Expense
     #[ORM\Column(type: 'datetime')]
     private $date;
 
-    #[ORM\Column(type: 'boolean')]
-    private $isPersonal = false;
-
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private $user;
+    private $createdBy;
 
-    #[ORM\ManyToOne(targetEntity: Group::class)]
-    private $inGroup;
-
-    #[ORM\ManyToOne(targetEntity: User::class)]
-    private $peer;
+    private $paidBy;
+    private $percentShouldered;
 
     public function getId(): ?int
     {
@@ -119,43 +113,43 @@ class Expense
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getCreatedBy(): ?User
     {
-        return $this->user;
+        return $this->createdBy;
     }
 
-    public function setUser(?User $user): self
+    public function setCreatedBy(?User $createdBy): self
     {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getInGroup(): ?Group
-    {
-        return $this->inGroup;
-    }
-
-    public function setInGroup(?Group $inGroup): self
-    {
-        $this->inGroup = $inGroup;
-
-        return $this;
-    }
-
-    public function getPeer(): ?User
-    {
-        return $this->peer;
-    }
-
-    public function setPeer(?User $peer): self
-    {
-        $this->peer = $peer;
+        $this->createdBy = $createdBy;
 
         return $this;
     }
 
     public function getDateDisplay(): string {
         return date_format($this->getDate(), 'M d, Y');
+    }
+
+    public function getPaidBy(): ?User
+    {
+        return $this->paidBy;
+    }
+
+    public function setPaidBy(?User $paidBy): self
+    {
+        $this->paidBy = $paidBy;
+
+        return $this;
+    }
+
+    public function getPercentShouldered(): ?string
+    {
+        return $this->percentShouldered;
+    }
+
+    public function setPercentShouldered(string $percentShouldered): self
+    {
+        $this->percentShouldered = $percentShouldered;
+
+        return $this;
     }
 }

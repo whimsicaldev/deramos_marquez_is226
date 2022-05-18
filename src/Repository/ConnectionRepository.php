@@ -62,15 +62,14 @@ class ConnectionRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Connection
+    public function findByUser($user): ?array
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('c.peer = :user')
+            ->orWhere('c.user = :user')
+            ->setParameter('user', $user)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
 }
