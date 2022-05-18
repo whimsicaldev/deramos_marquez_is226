@@ -23,14 +23,14 @@ class Expense
     #[ORM\JoinColumn(nullable: false)]
     private $category;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: '0')]
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private $totalAmount;
 
     #[ORM\Column(type: 'datetime')]
     private $date;
 
     #[ORM\Column(type: 'boolean')]
-    private $isPersonal;
+    private $isPersonal = false;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
@@ -153,5 +153,9 @@ class Expense
         $this->peer = $peer;
 
         return $this;
+    }
+
+    public function getDateDisplay(): string {
+        return date_format($this->getDate(), 'M d, Y');
     }
 }

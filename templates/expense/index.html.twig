@@ -10,140 +10,46 @@
 {% endblock %}
 
 {% block body %}
-    <div id="wrapper">
-        <header id="header">
-            <a class="logo">MayUtangBa.Me?</a>
-        </header>
-        <nav id="nav">
-            <ul class="links">
-                <li class="active"><a href="#">Expenses</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Account</a></li>
-                <li><a href="#">[first name] Logout</a></li>
-            </ul>
-            <ul class="icons">
-                <li><a href="#" class="icon fa-solid fa-bell"><span class="label">Notifications</span></a></li>
-            </ul>
-        </nav>
-        <div id="main">
-            <section class="post">
-                <h3>Add new expense</h3>
-                <form method="post" action="#">
-                    <div class="row gtr-uniform">
-                        <div class="col-6 col-12-xsmall">
-                            <input type="text" name="#" id="#" value="" placeholder="Item name" />
-                        </div>
-                        <div class="col-6 col-12-xsmall">
-                            <input type="text" name="#" id="#" value="" placeholder="Amount" />
-                        </div>
-                        <div class="col-6 col-12-xsmall">
-                            <select name="" id="">
-                                <option value="">- Category -</option>
-                                <option value="1">Category1</option>
-                                <option value="2">Category2</option>
-                            </select>
-                        </div>
-                        <div class="col-6 col-12-xsmall">
-                            <input type="datetime-local" name="#" id="#" value="" />
-                        </div>
-                        <div class="col-12">
-                            <textarea name="" id="" placeholder="Notes" rows="3"></textarea>
-                        </div>
-                        <div class="col-12">
-                            <ul class="actions">
-                                <li><input type="submit" value="Save" class="primary" /></li>
-                            </ul>
-                        </div>
-                    </div>
-                </form>
-                <hr />
-                
-                <h2>Expenses</h2>
-                <div class="table-wrapper">
-                    <table class="alt">
-                        <thead>
+    {% include "user-nav.html.twig" %}
+    <div id="main">
+        <section class="post">
+            <h3>[{{ connection.peer.nickname }}] Add Expense</h3>
+            {{ include('expense/_form-add-expense.html.twig') }}
+            <hr />
+            
+            <h2>Expenses</h2>
+            <div class="table-wrapper">
+                <table class="alt">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Item name</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for expense in expenses %}
                             <tr>
-                                <th>Date</th>
-                                <th>Item name</th>
-                                <th>Amount</th>
+                                <td>{{ expense.dateDisplay }}</td>
+                                <td>{{ expense.name }}</td>
+                                <td>{{ expense.totalAmount }}</td>
+                                <td><a href="/expense/{{ expense.id }}">View Expenses</a></td>
                             </tr>
-                        </thead>
-                        <tbody>
+                        {% else %}
                             <tr>
-                                <td>May 16</td>
-                                <td>Nutribun</td>
-                                <td>₱100.00</td>
-                                <td>
-                                    <select name="demo-category" id="demo-category">
-                                        <option value="">- Action -</option>
-                                        <option value="1">Update</option>
-                                        <option value="2">Delete</option>
-                                    </select>
-                                </td>
+                                <td colspan="5">no records found</td>
                             </tr>
-                            <tr>
-                                <td>May 15</td>
-                                <td>Rice</td>
-                                <td>₱20.00</td>
-                                <td>
-                                    <select name="demo-category" id="demo-category">
-                                        <option value="">- Action -</option>
-                                        <option value="1">Update</option>
-                                        <option value="2">Delete</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>May 15</td>
-                                <td>Coke</td>
-                                <td>₱85.00</td>
-                                <td>
-                                    <select name="demo-category" id="demo-category">
-                                        <option value="">- Action -</option>
-                                        <option value="1">Update</option>
-                                        <option value="2">Delete</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>May 12</td>
-                                <td>Airplane Ticket</td>
-                                <td>₱50,000.00</td>
-                                <td>
-                                    <select name="demo-category" id="demo-category">
-                                        <option value="">- Action -</option>
-                                        <option value="1">Update</option>
-                                        <option value="2">Delete</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>May 5</td>
-                                <td>Spotify</td>
-                                <td>₱35.00</td>
-                                <td>
-                                    <select name="demo-category" id="demo-category">
-                                        <option value="">- Action -</option>
-                                        <option value="1">Update</option>
-                                        <option value="2">Delete</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <hr />
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <hr />
 
-            </section>
-        </div>
-
-        <div id="copyright">
-            <ul><li>&copy; MayUtangBa.Me?</li></ul>
-        </div>
+        </section>
     </div>
+{% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
+{% block onloadedscripts %}
     <script src="{{ asset('build/external/js/jquery.min.js') }}"></script>
     <script src="{{ asset('build/external/js/jquery.scrollex.min.js') }}"></script>
     <script src="{{ asset('build/external/js/jquery.scrolly.min.js') }}"></script>
@@ -151,6 +57,4 @@
     <script src="{{ asset('build/external/js/breakpoints.min.js') }}"></script>
     <script src="{{ asset('build/external/js/util.js') }}"></script>
     <script src="{{ asset('build/external/js/main.js') }}"></script>
-{% endblock %}
-
 {% endblock %}

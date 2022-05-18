@@ -6,10 +6,12 @@ use App\Entity\Expense;
 use App\Entity\Connection;
 use App\Form\ExpenseType;
 use App\Repository\ExpenseRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Route('/expense')]
 class ExpenseController extends AbstractController
@@ -40,11 +42,26 @@ class ExpenseController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_expense_show', methods: ['GET'])]
-    public function show(Connection $connection): Response
+    #[Route('/{id}', name: 'app_expense_show', methods: ['GET', 'POST'])]
+    public function show(UserInterface $user, Request $request, Connection $connection, ExpenseRepository $expenseRepository): Response
     {
-        return $this->render('expense/index.html.twig', [
-            // 'expense' => $expense,
+        $expense = new Expense();
+        $form = $this->createForm(ExpenseType::class, $expense);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $peer = $connection->getUser()->getId() == $user->getId()? $connection->getPeer(): $user;
+            $expense->setUser($user);
+            $expense->setPeer($peer);
+            $expenseRepository->add($expense);
+            return $this->redirectToRoute('app_expense_show', ['id' => $connection->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('expense/index.html.twig', [
+            'expense' => $expense,
+            'form' => $form,
+            'connection' => $connection,
+            'expenses' => $expenseRepository->findAll()
         ]);
     }
 

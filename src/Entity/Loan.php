@@ -21,7 +21,7 @@ class Loan
     #[ORM\JoinColumn(nullable: false)]
     private $borrower;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: '0')]
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private $amount;
 
     #[ORM\Column(type: 'datetime')]

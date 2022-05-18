@@ -2338,6 +2338,8 @@ input, select, textarea {
 
 	input[type="text"],
 	input[type="datetime-local"],
+	input[type="date"],
+	input[type="number"],
 	input[type="password"],
 	input[type="email"],
 	select,
@@ -2384,6 +2386,8 @@ input, select, textarea {
 
 	input[type="text"],
 	input[type="datetime-local"],
+	input[type="date"],
+	input[type="number"],
 	input[type="password"],
 	input[type="email"],
 	select {
@@ -2488,6 +2492,8 @@ input, select, textarea {
 
 	input[type="text"],
 	input[type="datetime-local"],
+	input[type="date"],
+	input[type="number"],
 	input[type="password"],
 	input[type="email"],
 	select,

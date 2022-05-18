@@ -21,10 +21,10 @@ class Payment
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: '0')]
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private $paidAmount;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: '0')]
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private $sharedAmount;
 
     #[ORM\Column(type: 'datetime')]
