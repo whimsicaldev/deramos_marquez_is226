@@ -26,8 +26,7 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $category->setType(EnumCategoryType::CATEGORY_EXPENSE);
             $categoryRepository->add($category);
-            $toastMessage = 'Expense category created.';
-            $toastType = 'success';
+            return $this->redirectToRoute('app_category_index', ['toastMessage' => 'Expense category created.', 'toastType' => 'success'], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('category/index.html.twig', [
@@ -60,6 +59,6 @@ class CategoryController extends AbstractController
     public function delete(Request $request, Category $category, CategoryRepository $categoryRepository): Response
     {
         $categoryRepository->remove($category);
-        return $this->redirectToRoute('app_category_index', ['toastMessage' => 'Expense category deleted.', 'toastType' => 'update'], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_category_index', ['toastMessage' => 'Expense category deleted.', 'toastType' => 'warning'], Response::HTTP_SEE_OTHER);
     }
 }

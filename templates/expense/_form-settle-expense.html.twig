@@ -1,0 +1,20 @@
+{{ form_start(settleForm, { 'attr': { 'style': 'margin-bottom: 0px;' } }) }}
+    <div class="modal-body col-12">
+        <h3>{% if connection.userDebt > 0 %}
+            {{ connection.user.id == app.user.id? 'You owe ': 'You are owed '}} {{ connection.userDebt }}
+        {% elseif connection.peerDebt > 0 %}
+            {{ connection.peer.id == app.user.id? 'You owe ': 'You are owed '}} {{ connection.peerDebt }}
+        {% else %}
+            All settled.
+        {% endif %}</h3>
+        <div class="col-12 col-12-xsmall">
+            {{ form_widget(settleForm.totalAmount, { 'attr': { 'placeholder': 'Total Amount' }}) }}
+        </div>
+    </div>
+    <div class="modal-footer">
+        {{ form_errors(settleForm) }}
+        <ul class="actions">
+            <li><form style="margin: 0px;" method="post" id="delete-form"><input type="submit" class="primary" value="Settle" /></form></li>
+        </ul>
+    </div>
+{{ form_end(settleForm) }}

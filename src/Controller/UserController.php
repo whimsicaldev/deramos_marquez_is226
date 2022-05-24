@@ -20,6 +20,8 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(UserPasswordHasherInterface $passwordHasher, Request $request, User $user, UserRepository $userRepository): Response
     {
+        $toastMessage = $request->get('toastMessage')? $request->get('toastMessage'): false;
+        $toastType = $request->get('toastType')? $request->get('toastType'): '';
         $updateMessage = null;
         $userForm = $this->createForm(UserType::class, $user);
         $userPasswordForm = $this->createForm(UserPasswordType::class, $user);
@@ -29,11 +31,14 @@ class UserController extends AbstractController
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             $userRepository->add($user);
-            $updateMessage = "Profile successfully updated.";
+            $toastMessage = "Profile successfully updated.";
+            $toastType = 'success';
         } else if ($userPasswordForm->isSubmitted() && $userPasswordForm->isValid()) {
             $existingUser = $userRepository->loadUserByIdentifier($user->getUsername());
 
             if($existingUser != null && $existingUser->getId() != $user->getId()) {
+                $toastMessage = "Username is already in use.";
+                $toastType = 'warning';
                 $userForm->addError(new FormError('Username is already in use.'));
             } else {
                 $plaintextPassword = $user->getPassword1();
@@ -46,7 +51,8 @@ class UserController extends AbstractController
                 $user->setPassword($hashedPassword);
 
                 $userRepository->add($user);
-                $updateMessage = "Password successfully changed.";
+                $toastMessage = "Password successfully changed.";
+                $toastType = 'success';
             }
         }
 
@@ -54,7 +60,9 @@ class UserController extends AbstractController
             'user' => $user,
             'userForm' => $userForm,
             'userPasswordForm' => $userPasswordForm,
-            'updateMessage' => $updateMessage
+            'updateMessage' => $updateMessage,
+            'toastMessage' => $toastMessage,
+            'toastType' => $toastType
         ]);
     }
 

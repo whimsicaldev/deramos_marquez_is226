@@ -50,6 +50,7 @@ security:
     access_control:
         - { path: ^/login, role: PUBLIC_ACCESS }
         - { path: ^/signup, role: PUBLIC_ACCESS }
+        - { path: ^/forgot-password, role: PUBLIC_ACCESS }
         - { path: ^/signup-success, role: PUBLIC_ACCESS }
         - { path: ^/reset-password, role: PUBLIC_ACCESS }
         - { path: ^/oauth/login, role: PUBLIC_ACCESS }

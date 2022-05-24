@@ -57,6 +57,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password1;
     private $password2;
     private $displayName;
+    private $adjustmentAmount;
+    private $isBorrower;
+    private $isPeer;
 
     public function getId(): ?int
     {
@@ -259,6 +262,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDisplayName(string $displayName): self
     {
         $this->displayName = $displayName;
+
+        return $this;
+    }
+
+    public function getAdjustmentAmount(): ?string
+    {
+        return $this->adjustmentAmount;
+    }
+
+    public function setAdjustmentAmount(string $adjustmentAmount): self
+    {
+        $this->adjustmentAmount = $adjustmentAmount;
+
+        return $this;
+    }
+
+    public function getIsBorrower(): ?bool
+    {
+        return $this->isBorrower;
+    }
+
+    public function setIsBorrower(bool $isBorrower): self
+    {
+        $this->isBorrower = $isBorrower;
+
+        return $this;
+    }
+
+    public function getIsPeer(): ?bool
+    {
+        return $this->isPeer;
+    }
+
+    public function setIsPeer(bool $isPeer): self
+    {
+        $this->isPeer = $isPeer;
 
         return $this;
     }

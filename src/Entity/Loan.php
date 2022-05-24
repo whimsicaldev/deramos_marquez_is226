@@ -13,11 +13,11 @@ class Loan
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\ManyToOne(targetEntity: User::class, cascade: ["detach"])]
     #[ORM\JoinColumn(nullable: false)]
     private $lender;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\ManyToOne(targetEntity: User::class, cascade: ["detach"])]
     #[ORM\JoinColumn(nullable: false)]
     private $borrower;
 
@@ -27,14 +27,14 @@ class Loan
     #[ORM\Column(type: 'datetime')]
     private $date;
 
-    #[ORM\ManyToOne(targetEntity: Payment::class)]
+    #[ORM\ManyToOne(targetEntity: Payment::class, cascade: ["detach"])]
     private $payment;
 
-    #[ORM\ManyToOne(targetEntity: Expense::class)]
+    #[ORM\ManyToOne(targetEntity: Expense::class, cascade: ["detach"])]
     #[ORM\JoinColumn(nullable: false)]
     private $expense;
 
-    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[ORM\ManyToOne(targetEntity: Category::class, cascade: ["detach"])]
     #[ORM\JoinColumn(nullable: false)]
     private $category;
 

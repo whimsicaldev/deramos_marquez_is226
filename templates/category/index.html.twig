@@ -29,7 +29,7 @@
                                     <select onchange="if(this.value !== '#') location = this.value; else showModal({{ category.id }});">
                                         <option value="">- Action -</option>
                                         <option value="/category/{{ category.id }}/edit">Update Category</option>
-                                        <option value="#">Delete Category</option>
+                                        <option value="#" data-toggle="modal" data-target="#delete-modal">Delete Category</option>
                                     </select>
                                 </td>
                             </tr>
@@ -65,7 +65,7 @@
             </div>
             <div class="modal-footer">
                 <ul class="actions">
-                    <li><form style="margin: 0px;" method="post" id="delete-form"><input type="submit" class="primary" /></form></li>
+                    <li><form style="margin: 0px;" method="post" id="delete-form"><input type="submit" class="primary" value="Delete" /></form></li>
                 </ul>
             </div>
         </div>
@@ -90,7 +90,6 @@
     <script type="text/javascript">
         function showModal(categoryId) {
             $('#delete-form').attr('action', '/category/'+categoryId+'/delete');
-            $('#delete-modal').modal('show');
         }
     </script>
 {% endblock %}

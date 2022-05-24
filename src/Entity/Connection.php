@@ -15,11 +15,11 @@ class Connection
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "email")]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "email", cascade: ["detach"])]
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "email")]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "email", cascade: ["detach"])]
     #[ORM\JoinColumn(nullable: false)]
     private $peer;
 

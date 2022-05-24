@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Connection;
 use App\Form\ConnectionType;
 use App\Repository\ConnectionRepository;
+use App\Repository\LoanRepository;
+use App\Repository\ExpenseRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,15 +24,25 @@ class ConnectionController extends AbstractController
         $connection = new Connection();
         $form = $this->createForm(ConnectionType::class, $connection);
         $form->handleRequest($request);
+        $toastMessage = $request->get('toastMessage')? $request->get('toastMessage'): false;
+        $toastType = $request->get('toastType')? $request->get('toastType'): '';
 
         if ($form->isSubmitted() && $form->isValid()) {
             $peer = $userRepository->loadUserByIdentifier($connection->getPeerEmail());
-            if($peer != null) {
-                $connection->setUser($user);
-                $connection->setPeer($peer);
-                $connection->setStatus(EnumConnectionType::STATUS_APPROVED);
-                $connectionRepository->add($connection);
-                return $this->redirectToRoute('app_connection_index', [], Response::HTTP_SEE_OTHER); 
+            if($peer != null && !$peer->equals($user)) {
+                $connection = $connectionRepository->findByUserAndPeer($user, $peer);
+                if($connection == null) {
+                    $connection = new Connection();
+                    $connection->setUser($user);
+                    $connection->setPeer($peer);
+                    $connection->setStatus(EnumConnectionType::STATUS_APPROVED);
+                    $connectionRepository->add($connection);
+                    return $this->redirectToRoute('app_connection_index', ['toastMessage' => 'Contact has been added.', 'toastType' => 'success'], Response::HTTP_SEE_OTHER);     
+                } else {
+                    return $this->redirectToRoute('app_connection_index', ['toastMessage' => 'Contact already exists.', 'toastType' => 'warning'], Response::HTTP_SEE_OTHER); 
+                }
+            } else {
+                return $this->redirectToRoute('app_connection_index', ['toastMessage' => 'User does not exists.', 'toastType' => 'warning'], Response::HTTP_SEE_OTHER); 
             }
         }
 
@@ -38,43 +50,19 @@ class ConnectionController extends AbstractController
             'connection' => $connection,
             'form' => $form,
             'connections' => $connectionRepository->findByUser($user),
-
+            'toastMessage' => $toastMessage,
+            'toastType' => $toastType
         ]);
     }
 
-    #[Route('/new', name: 'app_connection_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ConnectionRepository $connectionRepository): Response
+    #[Route('/{id}/delete', name: 'app_connection_delete', methods: ['POST', 'GET'])]
+    public function delete(Connection $connection, ConnectionRepository $connectionRepository, LoanRepository $loanRepository, ExpenseRepository $expenseRepository): Response
     {
-        $connection = new Connection();
-        $form = $this->createForm(ConnectionType::class, $connection);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $connectionRepository->add($connection);
-            return $this->redirectToRoute('app_connection_index', [], Response::HTTP_SEE_OTHER);
+        $connectionRepository->remove($connection);
+        $loans = $loanRepository->findByBorrowerAndLender($connection->getUser(), $connection->getPeer());
+        foreach($loans as $loan) {
+            $expenseRepository->remove($loan->getExpense());
         }
-
-        return $this->renderForm('connection/new.html.twig', [
-            'connection' => $connection,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_connection_show', methods: ['GET'])]
-    public function show(Connection $connection): Response
-    {
-        return $this->render('connection/show.html.twig', [
-            'connection' => $connection,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_connection_delete', methods: ['POST'])]
-    public function delete(Request $request, Connection $connection, ConnectionRepository $connectionRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$connection->getId(), $request->request->get('_token'))) {
-            $connectionRepository->remove($connection);
-        }
-
-        return $this->redirectToRoute('app_connection_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_connection_index', ['toastMessage' => 'Contact has been deleted.', 'toastType' => 'warning'], Response::HTTP_SEE_OTHER);
     }
 }

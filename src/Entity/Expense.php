@@ -21,7 +21,7 @@ class Expense
     #[ORM\Column(type: 'text', nullable: true)]
     private $description;
 
-    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[ORM\ManyToOne(targetEntity: Category::class, cascade: ["detach"])]
     #[ORM\JoinColumn(nullable: false)]
     private $category;
 
@@ -31,7 +31,7 @@ class Expense
     #[ORM\Column(type: 'datetime')]
     private $date;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\ManyToOne(targetEntity: User::class, cascade: ["detach"])]
     #[ORM\JoinColumn(nullable: false)]
     private $createdBy;
 
@@ -40,6 +40,9 @@ class Expense
 
     private $paidBy;
     private $percentShouldered;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isPersonal = false;
 
     public function __construct()
     {
@@ -111,18 +114,6 @@ class Expense
         return $this;
     }
 
-    public function getIsPersonal(): ?bool
-    {
-        return $this->isPersonal;
-    }
-
-    public function setIsPersonal(bool $isPersonal): self
-    {
-        $this->isPersonal = $isPersonal;
-
-        return $this;
-    }
-
     public function getCreatedBy(): ?User
     {
         return $this->createdBy;
@@ -189,6 +180,18 @@ class Expense
                 $loan->setExpense(null);
             }
         }
+        return $this;
+    }
+
+    public function getIsPersonal(): ?bool
+    {
+        return $this->isPersonal;
+    }
+
+    public function setIsPersonal(bool $isPersonal): self
+    {
+        $this->isPersonal = $isPersonal;
+
         return $this;
     }
 }

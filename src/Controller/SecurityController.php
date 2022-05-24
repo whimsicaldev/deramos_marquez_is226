@@ -13,6 +13,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\UserRepository;
+use App\Repository\WebConfigRepository;
 use App\Entity\User;
 use App\Form\UserSignupType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -42,8 +43,12 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/signup', name: 'app_signup')]
-    public function signup(UserInterface $user = null, UserPasswordHasherInterface $passwordHasher, Request $request, VerifyEmailHelperInterface $verifyEmailHelper, UserRepository $userRepository, MailerInterface $mailer): Response
+    public function signup(WebConfigRepository $webConfigRepository, UserInterface $user = null, UserPasswordHasherInterface $passwordHasher, 
+        Request $request, VerifyEmailHelperInterface $verifyEmailHelper, UserRepository $userRepository, MailerInterface $mailer): Response
     {
+        $webConfig = $webConfigRepository->findOneBy([]);
+        $termsAndConditions = $webConfig != null && $webConfig->getTermsAndConditions() != null? $webConfig->getTermsAndConditions() : 'Sample Terms and Conditions.';
+
         if($user != null) {
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
@@ -67,7 +72,8 @@ class SecurityController extends AbstractController
 
         return $this->renderForm('security/signup.html.twig', [
             'user' => $user,
-            'form' => $form
+            'form' => $form,
+            'termsAndConditions' => $termsAndConditions
         ]);
     }
 
@@ -195,7 +201,16 @@ class SecurityController extends AbstractController
     #[Route('/signup-success', name: 'app_signup_success')]
     public function signupSuccess()
     {
-        return $this->render('security/signup-success.html.twig', [
-        ]);
+        return $this->render('security/signup-success.html.twig', []);
+    }
+
+    #[Route('/forgot-password', name: 'app_forgot_password')]
+    public function forgotPassword(UserInterface $user = null)
+    {
+        if($user != null) {
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('security/forgot-password.html.twig', []);
     }
 }

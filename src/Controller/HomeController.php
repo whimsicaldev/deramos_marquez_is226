@@ -16,10 +16,14 @@ class HomeController extends AbstractController
         if($user->isVerified()) {
             if($this->isGranted('ROLE_ADMIN')) {
                 return $this->redirectToRoute('app_web_config_index', [], Response::HTTP_SEE_OTHER);
+            } else {
+                return $this->redirectToRoute('app_expense_index', [], Response::HTTP_SEE_OTHER);
             }
-            return $this->render('home/index.html.twig', [
-                'controller_name' => 'HomeController',
-            ]);
+
+            // in prep for dashboard
+            // return $this->render('home/index.html.twig', [
+            //     'controller_name' => 'HomeController',
+            // ]);
         } else {
             return $this->redirectToRoute('app_verify', [], Response::HTTP_SEE_OTHER);
         }
