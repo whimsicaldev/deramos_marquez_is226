@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ app.user.nickname }} | Edit Profile{% endblock %}
+{% block title %}Update Terms and Conditions // MayUtangBa.Me?{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,15 +10,14 @@
 {% endblock %}
 
 {% block body %}
-    {% if is_granted('ROLE_ADMIN') %}
-       {% include "admin-nav.html.twig" %}
-    {% else %}
-        {% include "user-nav.html.twig" %}
-   {% endif %}
+    {% include "admin-nav.html.twig" %}
     <div id="main">
         <section class="post">
-            <h2>Welcome!</h2>
+
+            <h3>Update Terms and Conditions</h3>
+            {{ include('web_config/_form-edit-terms-and-conditions.html.twig') }}
             <hr />
+
         </section>
     </div>
 {% endblock %}

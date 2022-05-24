@@ -32,8 +32,21 @@
             </div>
         </div>
 
+        <div class="toast {{ toastType ?? '' }}" role="alert" aria-live="assertive" aria-atomic="true" style="position: fixed; top: 20px; right: 20px; z-index: 1;">
+            <div class="toast-body" style="padding: 5px; font-size: 15px; text-align: center;">
+                {{ toastMessage ?? '' }}
+            </div>
+        </div>
+
         {% block modal %}{% endblock %}
 
         {% block onloadedscripts %}{% endblock %}
+        <script type="text/javascript">
+            {% if toastMessage|default(false)%}
+                window.addEventListener('load', function () {
+                    $('.toast').toast('show');
+                });
+            {% endif %}
+        </script>
     </body>
 </html>

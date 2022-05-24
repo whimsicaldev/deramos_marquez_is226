@@ -14,6 +14,9 @@ class HomeController extends AbstractController
     {
 
         if($user->isVerified()) {
+            if($this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('app_web_config_index', [], Response::HTTP_SEE_OTHER);
+            }
             return $this->render('home/index.html.twig', [
                 'controller_name' => 'HomeController',
             ]);

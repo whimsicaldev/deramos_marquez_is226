@@ -20,29 +20,34 @@ class CategoryController extends AbstractController
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
+        $toastMessage = $request->get('toastMessage')? $request->get('toastMessage'): false;
+        $toastType = $request->get('toastType')? $request->get('toastType'): '';
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category->setType(EnumCategoryType::CATEGORY_EXPENSE);
             $categoryRepository->add($category);
-            return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
+            $toastMessage = 'Expense category created.';
+            $toastType = 'success';
         }
 
         return $this->renderForm('category/index.html.twig', [
             'category' => $category,
             'form' => $form,
             'categories' => $categoryRepository->findAll(),
+            'toastMessage' => $toastMessage,
+            'toastType' => $toastType
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, CategoryRepository $categoryRepository): Response
     {
-        $form = $this->createForm(Category1Type::class, $category);
+        $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $categoryRepository->add($category);
-            return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_category_index', ['toastMessage' => 'Expense category updated.', 'toastType' => 'update'], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('category/edit.html.twig', [
@@ -51,13 +56,10 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_category_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, CategoryRepository $categoryRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
-            $categoryRepository->remove($category);
-        }
-
-        return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
+        $categoryRepository->remove($category);
+        return $this->redirectToRoute('app_category_index', ['toastMessage' => 'Expense category deleted.', 'toastType' => 'update'], Response::HTTP_SEE_OTHER);
     }
 }

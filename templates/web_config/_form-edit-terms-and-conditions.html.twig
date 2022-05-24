@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+    <div class="row gtr-uniform">
+        <div class="col-12">
+            {{ form_widget(form.termsAndConditions, { 'attr': { 'placeholder': 'Enter terms and conditions', 'rows': 6 }}) }}
+        </div>
+        <div class="col-12">
+            <ul class="actions">
+                <li><input type="submit" value="Save" class="primary"/></li>
+            </ul>
+        </div>
+    </div>
+{{ form_end(form) }}
+
+
